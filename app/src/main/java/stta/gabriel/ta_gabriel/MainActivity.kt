@@ -15,7 +15,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnlogin.setOnClickListener {
-            LaporanActivity.start(this@MainActivity)
+
+            val id = inputId.text.toString()
+            val password = inputPassword.text.toString()
+            if (id.trim().isNullOrBlank())
+                inputId.error = "Masukkan ID Anda terlebih dahulu"
+            else if (password.trim().isNullOrBlank())
+                inputPassword.error = "Masukkan Password Anda terlebih dahulu"
+            else  LaporanActivity.start(this@MainActivity)
+            
         }
     }
 }
