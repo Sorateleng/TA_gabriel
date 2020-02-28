@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_laporan"
+        android:icon="@drawable/ic_laporan"
+        android:title="Laporan"/>
+    <item
+        android:id="@+id/menu_riwayat"
+        android:icon="@drawable/ic_riwayat"
+        android:title="Riwayat"/>
+    <item
+        android:id="@+id/menu_ulasan"
+        android:icon="@drawable/ic_ulasan"
+        android:title="Ulasan"/>
+
+</menu>
