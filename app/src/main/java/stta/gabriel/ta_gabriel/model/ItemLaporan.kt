@@ -6,4 +6,6 @@ data class ItemLaporan(
     val pelapor: String,
     val status: Int,
     val lokasi: Lokasi
-)
+){
+    constructor():this("", "", "", 0, Lokasi(0, 0))
+}
