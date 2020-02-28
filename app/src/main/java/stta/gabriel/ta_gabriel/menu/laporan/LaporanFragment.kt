@@ -3,28 +3,23 @@ package stta.gabriel.ta_gabriel.menu.laporan
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
-
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 
 /**
  * A simple [Fragment] subclass.
  */
-class LaporanFragment : Fragment(),LaporanAdapter.ItemAdapterCallback {
+class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
     private var stockList: MutableList<ItemLaporan> = mutableListOf()
     private lateinit var itemAdapter: LaporanAdapter
-    private lateinit var stock: DatabaseReference
-    lateinit var dbReference: DatabaseReference
+    private lateinit var laporan: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +36,14 @@ class LaporanFragment : Fragment(),LaporanAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        stock = dbReference.child("laporan")
-        stock.keepSynced(true)
+        laporan = FirebaseDatabase.getInstance().reference.child("laporan")
+        laporan.keepSynced(true)
         getStockList()
     }
 
     private fun getStockList() {
         val list = mutableListOf<ItemLaporan>()
-        stock.addValueEventListener(object : ValueEventListener {
+        laporan.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
@@ -59,8 +54,8 @@ class LaporanFragment : Fragment(),LaporanAdapter.ItemAdapterCallback {
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val item = data.getValue(ItemLaporan::class.java)!!
-                        if (item.status == 1)
+                        val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
+                        if (item?.status == 1)
                             list.add(item)
                     }
                 }
@@ -71,7 +66,7 @@ class LaporanFragment : Fragment(),LaporanAdapter.ItemAdapterCallback {
     }
 
     override fun itemClick(item: ItemLaporan) {
-Log.e("tot", item.toString())
+        Log.e("tot", item.toString())
     }
 
     companion object {

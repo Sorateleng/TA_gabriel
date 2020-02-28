@@ -14,7 +14,6 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_laporan.*
 
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
 /**
@@ -60,7 +59,6 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
                         val item = data.getValue(ItemRiwayat::class.java)!!
-                        if (item.riwayat1 == 1)
                             list.add(item)
                     }
                 }
@@ -70,7 +68,7 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
         })
     }
 
-    override fun itemClick(item: ItemLaporan) {
+    override fun itemClick(item: ItemRiwayat) {
         Log.e("tot", item.toString())
     }
 
