@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
                                     } else {
                                         toastMe("Password Salah")
                                     }
-                                else toastMe("Akun tidak ditemukan")
-                            } else toastMe("Akun tidak ditemukan")
+                                else toastMe("Akun tidak ditemukan ")
+                            } else toastMe("Akun tidak Ada")
 
                         }
                     }

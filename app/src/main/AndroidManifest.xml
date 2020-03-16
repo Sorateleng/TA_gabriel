@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LaporanActivity"></activity>
+        <activity android:name=".detaillaporan.DetailLaporanActivity"></activity>
+        <activity android:name=".LaporanActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppThemeNoTitle">

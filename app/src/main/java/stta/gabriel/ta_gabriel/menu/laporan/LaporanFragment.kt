@@ -1,6 +1,7 @@
 package stta.gabriel.ta_gabriel.menu.laporan
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 
 /**
@@ -66,7 +68,9 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
     }
 
     override fun itemClick(item: ItemLaporan) {
-        Log.e("tot", item.toString())
+        val intent = Intent (context,DetailLaporanActivity::class.java)
+        intent.putExtra(KEY_DATA_LAPORAN , item)
+        startActivity(intent)
     }
 
     companion object {
@@ -76,3 +80,4 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
     }
 
 }
+const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN "
