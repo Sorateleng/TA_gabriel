@@ -13,13 +13,12 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
-import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
 /**
  * A simple [Fragment] subclass.
  */
-class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
+class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
     private var stockList: MutableList<ItemRiwayat> = mutableListOf()
     private lateinit var itemAdapter: RiwayatAdapter
     private lateinit var laporan: DatabaseReference
@@ -45,7 +44,7 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
     }
 
     private fun getStockList() {
-        val list = mutableListOf<ItemLaporan>()
+        val list = mutableListOf<ItemRiwayat>()
         laporan.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
@@ -57,7 +56,7 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
+                        val item = data.getValue<ItemRiwayat>(ItemRiwayat::class.java)
                         if (item?.status == 2)
                             list.add(item)
                     }

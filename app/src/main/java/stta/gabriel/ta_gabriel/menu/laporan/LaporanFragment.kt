@@ -13,12 +13,14 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.menu.riwayat.LaporanAdapter
 import stta.gabriel.ta_gabriel.model.ItemLaporan
+
 
 /**
  * A simple [Fragment] subclass.
  */
-class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
+class LaporanFragment: Fragment(), LaporanAdapter.ItemAdapterCallback {
     private var stockList: MutableList<ItemLaporan> = mutableListOf()
     private lateinit var itemAdapter: LaporanAdapter
     private lateinit var laporan: DatabaseReference

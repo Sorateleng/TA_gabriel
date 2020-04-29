@@ -1,86 +1,51 @@
-package stta.gabriel.ta_gabriel.menu.laporan
+package stta.gabriel.ta_gabriel.menu.riwayat
 
-
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_laporan.*
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.item_laporan.view.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
-import stta.gabriel.ta_gabriel.menu.UlasanAdapter
-import stta.gabriel.ta_gabriel.menu.riwayat.RiwayatAdapter
-import stta.gabriel.ta_gabriel.model.ItemUlasan
+import stta.gabriel.ta_gabriel.model.ItemLaporan
+import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
-/**
- * A simple [Fragment] subclass.
- */
-class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
-    private var stockList: MutableList<ItemUlasan> = mutableListOf()
-    private lateinit var itemAdapter: UlasanAdapter
-    private lateinit var laporan: DatabaseReference
+class LaporanAdapter(
+    private val items: MutableList<ItemLaporan>,
+    private val callback: ItemAdapterCallback
+) : RecyclerView.Adapter<LaporanAdapter.Holder>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_laporan, container, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_laporan,parent, false)
+        return Holder(itemView = view)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        itemAdapter = UlasanAdapter(stockList, this)
-        rv_laporan.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = itemAdapter
-        }
-        laporan = FirebaseDatabase.getInstance().reference.child("ulasan")
-        laporan.keepSynced(true)
-        getStockList()
+    override fun getItemCount() = items.size
+    override fun getItemId(position: Int) = position.toLong()
+    override fun getItemViewType(position: Int) = position
+
+    override fun onBindViewHolder(p0: Holder, p1: Int) {
+        val item = items[p1]
+        p0.bind(item)
     }
 
-    private fun getStockList() {
-        val list = mutableListOf<RiwayatAdapter.ItemAdapterCallback>()
-        laporan.addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
 
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+
+        fun bind(item: ItemLaporan) {
+            itemView.apply {
+                textViewItemLaporan.text = item.pelapor
+                setOnClickListener { callback.itemClick(item) }
             }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                list.clear()
-                stockList.clear()
 
-                if (dataSnapshot.exists()) {
-                    for (data in dataSnapshot.children) {
-                        val item = data.getValue<UlasanAdapterr>(UlasanAdapter::class.java)
-                        if (item?.status == 3)
-                            list.add(item)
-                    }
-                }
-                stockList.addAll(list)
-                itemAdapter.notifyDataSetChanged()
-            }
-        })
-    }
-
-    override fun itemClick(item: UlasanAdapter) {
-        val intent = Intent (context,DetailLaporanActivity::class.java)
-        intent.putExtra( KEY_DATA_LAPORAN , item)
-        startActivity(intent)
-    }
-
-    companion object {
-        fun newInstance(): Fragment {
-            return LaporanFragment()
         }
+
+
     }
 
+    interface ItemAdapterCallback {
+        fun itemClick(item: ItemLaporan)
+
+    }
 }
-const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN"
