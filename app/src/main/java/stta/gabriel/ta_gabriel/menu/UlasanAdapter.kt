@@ -12,18 +12,18 @@ import stta.gabriel.ta_gabriel.R
 /**
  * A simple [Fragment] subclass.
  */
-class RiwayatFragment : Fragment() {
+class UlasanAdapter : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_riwayat, container, false)
+        return inflater.inflate(R.layout.fragment_laporan, container, false)
     }
     companion object {
         fun newInstance(): Fragment {
-            return RiwayatFragment()
+            return UlasanAdapter()
         }
     }
 

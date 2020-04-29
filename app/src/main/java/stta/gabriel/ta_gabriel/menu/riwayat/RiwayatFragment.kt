@@ -1,19 +1,19 @@
 package stta.gabriel.ta_gabriel.menu.riwayat
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
-
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
 /**
@@ -22,8 +22,7 @@ import stta.gabriel.ta_gabriel.model.ItemRiwayat
 class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
     private var stockList: MutableList<ItemRiwayat> = mutableListOf()
     private lateinit var itemAdapter: RiwayatAdapter
-    private lateinit var stock: DatabaseReference
-    lateinit var dbReference: DatabaseReference
+    private lateinit var laporan: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,14 +39,14 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        stock = dbReference.child("Riwayat")
-        stock.keepSynced(true)
+        laporan = FirebaseDatabase.getInstance().reference.child("riwayat")
+        laporan.keepSynced(true)
         getStockList()
     }
 
     private fun getStockList() {
-        val list = mutableListOf<ItemRiwayat>()
-        stock.addValueEventListener(object : ValueEventListener {
+        val list = mutableListOf<ItemLaporan>()
+        laporan.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
@@ -58,7 +57,8 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val item = data.getValue(ItemRiwayat::class.java)!!
+                        val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
+                        if (item?.status == 2)
                             list.add(item)
                     }
                 }
@@ -69,7 +69,9 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
     }
 
     override fun itemClick(item: ItemRiwayat) {
-        Log.e("tot", item.toString())
+        val intent = Intent (context,DetailLaporanActivity::class.java)
+        intent.putExtra(KEY_DATA_LAPORAN , item)
+        startActivity(intent)
     }
 
     companion object {
@@ -79,3 +81,4 @@ class RiwayatFragment : Fragment(),RiwayatAdapter.ItemAdapterCallback {
     }
 
 }
+const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN "

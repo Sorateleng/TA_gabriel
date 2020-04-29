@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.menu.laporan.LaporanFragment
-import stta.gabriel.ta_gabriel.menu.RiwayatFragment
+import stta.gabriel.ta_gabriel.menu.UlasanAdapter
 import stta.gabriel.ta_gabriel.menu.UlasanFragment
 
 class LaporanActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class LaporanActivity : AppCompatActivity() {
                 if (item.itemId == R.id.menu_laporan) {
                     fragment = LaporanFragment.newInstance()
                 } else if (item.itemId == R.id.menu_riwayat) {
-                    fragment = RiwayatFragment.newInstance()
+                    fragment = UlasanAdapter.newInstance()
                 } else if (item.itemId == R.id.menu_ulasan) {
                     fragment = UlasanFragment.newInstance()
                 }

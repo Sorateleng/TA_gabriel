@@ -69,7 +69,7 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
 
     override fun itemClick(item: ItemLaporan) {
         val intent = Intent (context,DetailLaporanActivity::class.java)
-        intent.putExtra(KEY_DATA_LAPORAN , item)
+        intent.putExtra( KEY_DATA_LAPORAN , item)
         startActivity(intent)
     }
 
@@ -80,4 +80,4 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
     }
 
 }
-const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN "
+const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN"
