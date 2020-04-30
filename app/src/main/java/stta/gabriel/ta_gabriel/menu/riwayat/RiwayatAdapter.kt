@@ -33,7 +33,7 @@ class RiwayatAdapter(
 
         fun bind(item: ItemRiwayat) {
             itemView.apply {
-                textViewItemLaporan.text = item.riwayat1
+                textViewItemLaporan.text = item.pelapor
                 setOnClickListener { callback.itemClick(item) }
             }
 

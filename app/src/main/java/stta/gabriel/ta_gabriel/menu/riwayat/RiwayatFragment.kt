@@ -3,7 +3,6 @@ package stta.gabriel.ta_gabriel.menu.riwayat
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,7 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_riwayat, container, false)
+        return inflater.inflate(R.layout.fragment_laporan, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,7 +56,7 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
                         val item = data.getValue<ItemRiwayat>(ItemRiwayat::class.java)
-                        if (item?.status == 2)
+                        if (item?.status == "2")
                             list.add(item)
                     }
                 }
@@ -69,7 +68,7 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
 
     override fun itemClick(item: ItemRiwayat) {
         val intent = Intent (context,DetailLaporanActivity::class.java)
-        intent.putExtra(KEY_DATA_LAPORAN , item)
+        intent.putExtra(KEY_DATA_RIWAYAT, item)
         startActivity(intent)
     }
 
@@ -80,4 +79,4 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
     }
 
 }
-const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN "
+const val KEY_DATA_RIWAYAT = "KEY_DATA_RIWAYAT"
