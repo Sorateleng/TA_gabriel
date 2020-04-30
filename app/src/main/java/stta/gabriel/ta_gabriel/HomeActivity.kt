@@ -13,7 +13,7 @@ import stta.gabriel.ta_gabriel.menu.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.menu.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.menu.ulasan.UlasanFragment
 
-class LaporanActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private var lastTab = 0
     var fragment: Fragment? = null
@@ -60,7 +60,7 @@ class LaporanActivity : AppCompatActivity() {
 
     companion object {
         fun start(activity: Activity) {
-            val intent = Intent(activity, LaporanActivity::class.java)
+            val intent = Intent(activity, HomeActivity::class.java)
             activity.startActivity(intent)
             activity.finish()
         }
