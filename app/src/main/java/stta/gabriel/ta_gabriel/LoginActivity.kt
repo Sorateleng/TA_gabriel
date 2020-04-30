@@ -11,7 +11,7 @@ import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.IS_LOGGED_IN
 import stta.gabriel.ta_gabriel.util.SharedPrefs
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var akun: DatabaseReference
     private lateinit var preferences: SharedPrefs
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         preferences = SharedPrefs(this)
         if (preferences.getBoolean(IS_LOGGED_IN)) {
-            LaporanActivity.start(this)
+            HomeActivity.start(this)
         }
 
         akun = FirebaseDatabase.getInstance().reference.child("user")
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                                 val akun = user.getValue<Akun>(Akun::class.java)
                                 if (akun != null)
                                     if (akun.password.toString() == inputPassword.text.toString()) {
-                                        LaporanActivity.start(this@MainActivity)
+                                        HomeActivity.start(this@LoginActivity)
                                         preferences.saveBoolean(IS_LOGGED_IN, true)
                                     } else {
                                         toastMe("Password Salah")
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun toastMe(s: String) {
         Toast.makeText(
-            this@MainActivity,
+            this@LoginActivity,
             s,
             Toast.LENGTH_SHORT
         ).show()

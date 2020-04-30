@@ -2,18 +2,18 @@ package stta.gabriel.ta_gabriel
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.menu.laporan.LaporanFragment
-import stta.gabriel.ta_gabriel.menu.UlasanAdapter
-import stta.gabriel.ta_gabriel.menu.UlasanFragment
+import stta.gabriel.ta_gabriel.menu.riwayat.RiwayatFragment
+import stta.gabriel.ta_gabriel.menu.ulasan.UlasanFragment
 
-class LaporanActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private var lastTab = 0
     var fragment: Fragment? = null
@@ -25,7 +25,7 @@ class LaporanActivity : AppCompatActivity() {
                 if (item.itemId == R.id.menu_laporan) {
                     fragment = LaporanFragment.newInstance()
                 } else if (item.itemId == R.id.menu_riwayat) {
-                    fragment = UlasanAdapter.newInstance()
+                    fragment = RiwayatFragment.newInstance()
                 } else if (item.itemId == R.id.menu_ulasan) {
                     fragment = UlasanFragment.newInstance()
                 }
@@ -58,9 +58,9 @@ class LaporanActivity : AppCompatActivity() {
     }
 
 
-companion object{
-        fun start (activity:Activity){
-            val intent=Intent(activity,LaporanActivity::class.java)
+    companion object {
+        fun start(activity: Activity) {
+            val intent = Intent(activity, HomeActivity::class.java)
             activity.startActivity(intent)
             activity.finish()
         }
