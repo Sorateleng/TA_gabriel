@@ -5,15 +5,13 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ItemRiwayat(
-    val riwayat: String,
+    val foto1: String,
+    val foto2: String,
     val pelapor: String,
-    val status: String,
+    var status: Int,
     val lokasi: Lokasi,
-    val head: Int
-
-) : Parcelable
+    val head : Int
+) :Parcelable
 {
-    constructor():this ( "","","",Lokasi(0, 0),0)
+    constructor():this("", "", "", 0, Lokasi(0, 0),0)
 }
-
-
