@@ -13,6 +13,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity.Companion.startDetail
 import stta.gabriel.ta_gabriel.menu.riwayat.LaporanAdapter
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 
@@ -40,7 +41,7 @@ class LaporanFragment: Fragment(), LaporanAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        laporan = FirebaseDatabase.getInstance().reference.child("laporan")
+        laporan = FirebaseDatabase.getInstance().reference.child(LAPORAN)
         laporan.keepSynced(true)
         getStockList()
     }
@@ -71,8 +72,7 @@ class LaporanFragment: Fragment(), LaporanAdapter.ItemAdapterCallback {
 
     override fun itemClick(item: ItemLaporan) {
         val intent = Intent (context,DetailLaporanActivity::class.java)
-        intent.putExtra( KEY_DATA_LAPORAN , item)
-        startActivity(intent)
+        startActivity(startDetail(intent, item, false))
     }
 
     companion object {
@@ -82,4 +82,4 @@ class LaporanFragment: Fragment(), LaporanAdapter.ItemAdapterCallback {
     }
 
 }
-const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN"
+const val LAPORAN = "laporan"

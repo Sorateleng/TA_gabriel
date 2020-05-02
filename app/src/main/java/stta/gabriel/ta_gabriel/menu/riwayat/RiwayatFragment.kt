@@ -12,12 +12,15 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity.Companion.startDetail
+import stta.gabriel.ta_gabriel.menu.laporan.LAPORAN
+import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
 /**
  * A simple [Fragment] subclass.
  */
-class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
+class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
     private var stockList: MutableList<ItemRiwayat> = mutableListOf()
     private lateinit var itemAdapter: RiwayatAdapter
     private lateinit var laporan: DatabaseReference
@@ -37,7 +40,7 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        laporan = FirebaseDatabase.getInstance().reference.child("riwayat")
+        laporan = FirebaseDatabase.getInstance().reference.child(LAPORAN)
         laporan.keepSynced(true)
         getStockList()
     }
@@ -55,8 +58,8 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val item = data.getValue<ItemRiwayat>(ItemRiwayat::class.java)
-                        if (item?.status == "2")
+                        val item = data.getValue(ItemRiwayat::class.java)
+                        if (item?.status == 2)
                             list.add(item)
                     }
                 }
@@ -67,9 +70,17 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
     }
 
     override fun itemClick(item: ItemRiwayat) {
-        val intent = Intent (context,DetailLaporanActivity::class.java)
-        intent.putExtra(KEY_DATA_RIWAYAT, item)
-        startActivity(intent)
+        val intent = Intent(context, DetailLaporanActivity::class.java)
+        startDetail(
+            intent, ItemLaporan(
+                item.foto1,
+                item.foto2,
+                item.pelapor,
+                item.status,
+                item.lokasi,
+                item.head
+            ), true
+        ).let { startActivity(it) }
     }
 
     companion object {
@@ -79,4 +90,3 @@ class RiwayatFragment: Fragment(),RiwayatAdapter.ItemAdapterCallback {
     }
 
 }
-const val KEY_DATA_RIWAYAT = "KEY_DATA_RIWAYAT"

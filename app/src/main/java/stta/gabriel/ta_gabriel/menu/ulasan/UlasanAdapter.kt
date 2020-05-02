@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_laporan.view.*
+import kotlinx.android.synthetic.main.item_ulasan.view.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemUlasan
 
@@ -15,7 +16,7 @@ class UlasanAdapter(
 ) : RecyclerView.Adapter<UlasanAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_riwayat,parent, false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_ulasan,parent, false)
         return Holder(itemView = view)
     }
 
@@ -34,7 +35,7 @@ class UlasanAdapter(
 
         fun bind(item: ItemUlasan) {
             itemView.apply {
-                textViewItemLaporan.text = item.isi
+                textViewItemUlasan.text = item.isi
                 setOnClickListener { callback.itemClick(item) }
             }
 

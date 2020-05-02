@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bggradient"
+    android:orientation="vertical"
     tools:context=".detaillaporan.DetailLaporanActivity">
 
-    <ImageView
+    <LinearLayout
+        android:paddingVertical="20dp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/img_laporandarirt">
-    </ImageView>
+        android:orientation="horizontal">
 
-<com.google.android.material.textfield.TextInputLayout
-android:id="@+id/til_lokasi"
-style="@style/Widget.AppCompat.EditText"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginBottom="20dp"
-android:background="@drawable/rounded_edt">
+        <ImageView
+            tools:src="@mipmap/ic_launcher"
+            android:paddingHorizontal="5dp"
+            android:id="@+id/img_laporan1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-<com.google.android.material.textfield.TextInputEditText
-    android:id="@+id/inputlokasi"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/transparent"
-    android:hint="Lokasi"
-    android:imeOptions="actionNext"
-    android:inputType="text"
-    android:maxLines="1"
-    android:nextFocusForward="@id/inputrt"
-    android:paddingVertical="5dp" />
+        <ImageView
+            tools:src="@mipmap/ic_launcher"
+            android:paddingHorizontal="5dp"
+            android:id="@+id/img_laporan2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_lokasi"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_edt">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputlokasi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:hint="Lokasi"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            android:nextFocusForward="@id/inputrt"
+            android:paddingVertical="5dp" />
 
 
-
-</com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_laporanrt"
@@ -60,11 +75,11 @@ android:background="@drawable/rounded_edt">
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_proses"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="proses"
         android:layout_gravity="right"
-        android:id="@+id/btn_proses">
+        android:text="proses">
 
     </Button>
 

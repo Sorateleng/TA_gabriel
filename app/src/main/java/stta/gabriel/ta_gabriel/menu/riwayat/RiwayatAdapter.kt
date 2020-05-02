@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_laporan.view.*
+import kotlinx.android.synthetic.main.item_riwayat.view.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
@@ -33,7 +33,7 @@ class RiwayatAdapter(
 
         fun bind(item: ItemRiwayat) {
             itemView.apply {
-                textViewItemLaporan.text = item.pelapor
+                textViewItemRiwayat.text = item.pelapor
                 setOnClickListener { callback.itemClick(item) }
             }
 

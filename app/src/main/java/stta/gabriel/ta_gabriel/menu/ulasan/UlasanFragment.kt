@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
@@ -37,7 +38,7 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        ulasan = FirebaseDatabase.getInstance().reference.child("ulasan")
+        ulasan = FirebaseDatabase.getInstance().reference.child(ULASAN)
         ulasan.keepSynced(true)
         getulasanList()
     }
@@ -66,9 +67,7 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
     }
 
     override fun itemClick(item: ItemUlasan) {
-        val intent = Intent(context, DetailLaporanActivity::class.java)
-        intent.putExtra(KEY_DATA_ULASAN, item)
-        startActivity(intent)
+        Toast.makeText(context, item.isi, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
@@ -80,3 +79,4 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
 }
 
 const val KEY_DATA_ULASAN = "KEY_DATA_ULASAN"
+const val ULASAN = "ulasan"
