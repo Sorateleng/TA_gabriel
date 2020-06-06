@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                                             HomeActivity.start(this@LoginActivity)
                                             preferences.saveInt(IS_LOGGED_IN, 1)
                                         } else if (akun.access == 2) {
-                                            HomeActivity.start(this@LoginActivity)
+                                            HomeRTActivity.start(this@LoginActivity)
                                             preferences.saveInt(IS_LOGGED_IN, 2)
                                         } else {
                                             toastMe("Akun tidak ada akses")

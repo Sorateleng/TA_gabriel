@@ -7,7 +7,7 @@
     <item
         android:id="@+id/menu_ulasan_rt"
         android:icon="@drawable/ic_riwayat"
-        android:title="Riwayat"/>
+        android:title="Ulasan"/>
     
 
 </menu>

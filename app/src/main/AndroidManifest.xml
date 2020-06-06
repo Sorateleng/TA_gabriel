@@ -10,9 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".menurt.tmbh_laporan"></activity>
-        <activity android:name=".activity_ubah_status" />
-        <activity android:name=".detaillaporan.ItemStatus" />
+        <activity android:name=".HomeRTActivity"></activity>
         <activity android:name=".detaillaporan.DetailLaporanActivity" />
         <activity android:name=".HomeActivity" />
         <activity
