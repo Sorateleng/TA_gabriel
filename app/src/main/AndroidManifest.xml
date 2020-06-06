@@ -3,14 +3,16 @@
     package="stta.gabriel.ta_gabriel">
 
     <application
+        android:name=".BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".BaseApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".detaillaporan.DetailLaporanActivity"></activity>
+        <activity android:name=".activity_ubah_status"></activity>
+        <activity android:name=".detaillaporan.ItemStatus" />
+        <activity android:name=".detaillaporan.DetailLaporanActivity" />
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".LoginActivity"
