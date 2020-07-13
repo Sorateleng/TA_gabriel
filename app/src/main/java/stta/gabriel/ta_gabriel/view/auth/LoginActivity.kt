@@ -8,11 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.view.home.HomeActivity
-import stta.gabriel.ta_gabriel.view.home.HomeRTActivity
 import stta.gabriel.ta_gabriel.model.Akun
-import stta.gabriel.ta_gabriel.util.IS_LOGGED_IN
-import stta.gabriel.ta_gabriel.util.SharedPrefs
+import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
+import stta.gabriel.ta_gabriel.view.menu.rt.HomeRTActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var akun: DatabaseReference
@@ -25,55 +24,67 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         preferences = SharedPrefs(this)
-        if (preferences.getInteger(IS_LOGGED_IN) == 1) {
-            HomeActivity.start(this)
-        } else if (preferences.getInteger(IS_LOGGED_IN) == 2) {
-            HomeRTActivity.start(this)
+        when {
+            preferences.getInteger(IS_LOGGED_IN) == ID_OFFICER -> {
+                HomeActivity.start(this)
+            }
+            preferences.getInteger(IS_LOGGED_IN) == ID_RT -> {
+                HomeRTActivity.start(this)
+            }
+            else -> {
+                toastMe("Tidak memiliki hak akses")
+                throw UnsupportedOperationException()
+            }
         }
 
-        akun = FirebaseDatabase.getInstance().reference.child("user")
+        akun = FirebaseDatabase.getInstance().reference.child(TABLE_USER)
 
         btnlogin.setOnClickListener {
 
             val id = inputId.text.toString()
             val password = inputPassword.text.toString()
-            if (id.trim().isBlank())
-                inputId.error = "Masukkan ID Anda terlebih dahulu"
-            else if (password.trim().isBlank())
-                inputPassword.error = "Masukkan Password Anda terlebih dahulu"
-            else {
-                akun.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-
-                    override fun onDataChange(p0: DataSnapshot) {
-                        if (p0.exists()) {
-                            Log.e("data1", p0.value.toString())
-                            val user = p0.child(inputId.text.toString())
-                            if (user.exists()) {
-                                val akun = user.getValue<Akun>(Akun::class.java)
-                                if (akun != null)
-                                    if (akun.password.toString() == inputPassword.text.toString()) {
-
-                                        if (akun.access == 1) {
-                                            HomeActivity.start(this@LoginActivity)
-                                            preferences.saveInt(IS_LOGGED_IN, 1)
-                                        } else if (akun.access == 2) {
-                                            HomeRTActivity.start(this@LoginActivity)
-                                            preferences.saveInt(IS_LOGGED_IN, 2)
-                                        } else {
-                                            toastMe("Akun tidak ada akses")
-                                        }
-                                    } else {
-                                        toastMe("Password Salah")
-                                    }
-                                else toastMe("Akun tidak ditemukan ")
-                            } else toastMe("Akun tidak Ada")
+            when {
+                id.trim().isBlank() -> inputId.error = "Masukkan ID Anda terlebih dahulu"
+                password.trim().isBlank() -> inputPassword.error =
+                    "Masukkan Password Anda terlebih dahulu"
+                else -> {
+                    akun.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
 
                         }
-                    }
-                })
+
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if (p0.exists()) {
+                                Log.e("data1", p0.value.toString())
+                                val user = p0.child(inputId.text.toString())
+                                if (user.exists()) {
+                                    val akun = user.getValue<Akun>(Akun::class.java)
+                                    if (akun != null)
+                                        if (akun.password.toString() == inputPassword.text.toString()) {
+
+                                            when (akun.access) {
+                                                ID_OFFICER -> {
+                                                    HomeActivity.start(this@LoginActivity)
+                                                    preferences.saveInt(IS_LOGGED_IN, 1)
+                                                }
+                                                ID_RT -> {
+                                                    HomeRTActivity.start(this@LoginActivity)
+                                                    preferences.saveInt(IS_LOGGED_IN, 2)
+                                                }
+                                                else -> {
+                                                    toastMe("Akun tidak ada akses")
+                                                }
+                                            }
+                                        } else {
+                                            toastMe("Password Salah")
+                                        }
+                                    else toastMe("Akun tidak ditemukan ")
+                                } else toastMe("Akun tidak Ada")
+
+                            }
+                        }
+                    })
+                }
             }
 
         }

@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel.view.home
+package stta.gabriel.ta_gabriel.view.menu.rt
 
 import android.app.Activity
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.util.SELECTED_MENU
 import stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan.TambahLaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.rt.ulasan.UlasanRTFragment
 
@@ -17,7 +18,6 @@ class HomeRTActivity : AppCompatActivity() {
 
     private var lastTab = 0
     var fragment: Fragment? = null
-    private val SELECTED_MENU = "selected_menu"
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
@@ -47,8 +47,7 @@ class HomeRTActivity : AppCompatActivity() {
     }
 
     private fun setNavTab() {
-        navigation.selectedItemId =
-            R.id.menu_tambah_laporan
+        navigation.selectedItemId = R.id.menu_tambah_laporan
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel.view.home
+package stta.gabriel.ta_gabriel.view.menu.officer
 
 import android.app.Activity
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.util.SELECTED_MENU
 import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment
@@ -18,7 +19,6 @@ class HomeActivity : AppCompatActivity() {
 
     private var lastTab = 0
     var fragment: Fragment? = null
-    private val SELECTED_MENU = "selected_menu"
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->

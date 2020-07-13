@@ -115,6 +115,7 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:nextFocusDown="@id/inputPassword"
+                    android:nextFocusForward="@id/inputPassword"
                     android:paddingVertical="5dp" />
 
             </com.google.android.material.textfield.TextInputLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bggradient"
-    tools:context=".view.home.HomeActivity">
+    tools:context=".view.menu.officer.HomeActivity">
 
     <FrameLayout
         android:id="@+id/container"
