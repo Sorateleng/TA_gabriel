@@ -22,8 +22,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         preferences = SharedPrefs(this)
-        if (preferences.getBoolean(IS_LOGGED_IN)) {
+        if (preferences.getInteger(IS_LOGGED_IN) == 1) {
             HomeActivity.start(this)
+        } else if (preferences.getInteger(IS_LOGGED_IN) == 2) {
+            HomeRTActivity.start(this)
         }
 
         akun = FirebaseDatabase.getInstance().reference.child("user")
@@ -50,8 +52,16 @@ class LoginActivity : AppCompatActivity() {
                                 val akun = user.getValue<Akun>(Akun::class.java)
                                 if (akun != null)
                                     if (akun.password.toString() == inputPassword.text.toString()) {
-                                        HomeActivity.start(this@LoginActivity)
-                                        preferences.saveBoolean(IS_LOGGED_IN, true)
+
+                                        if (akun.access == 1) {
+                                            HomeActivity.start(this@LoginActivity)
+                                            preferences.saveInt(IS_LOGGED_IN, 1)
+                                        } else if (akun.access == 2) {
+                                            HomeRTActivity.start(this@LoginActivity)
+                                            preferences.saveInt(IS_LOGGED_IN, 2)
+                                        } else {
+                                            toastMe("Akun tidak ada akses")
+                                        }
                                     } else {
                                         toastMe("Password Salah")
                                     }
