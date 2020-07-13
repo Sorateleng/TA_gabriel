@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="stta.gabriel.ta_gabriel">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
+        <activity android:name=".view.camera.CameraActivity"></activity>
         <activity android:name=".view.menu.rt.HomeRTActivity" />
         <activity android:name=".view.detaillaporan.DetailLaporanActivity" />
         <activity android:name=".view.menu.officer.HomeActivity" />

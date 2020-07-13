@@ -80,7 +80,7 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
 
     override fun itemClick(item: ItemLaporan) {
         val intent = Intent(context, DetailLaporanActivity::class.java)
-        startActivity(startDetail(intent, item, item.status == ID_PROGRESS))
+        startActivity(startDetail(intent, item, item.status))
     }
 
     companion object {

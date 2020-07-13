@@ -3,7 +3,6 @@ package stta.gabriel.ta_gabriel.view.detaillaporan
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
@@ -11,13 +10,14 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_detail_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
-import stta.gabriel.ta_gabriel.util.TABLE_LAPORAN
-import stta.gabriel.ta_gabriel.util.loadSquareImageFromUrl
+import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.camera.CameraActivity
 
 class DetailLaporanActivity : AppCompatActivity() {
 
     private val item by lazy { intent.getParcelableExtra(KEY_DATA_LAPORAN) as ItemLaporan }
     private val isDone by lazy { intent.getBooleanExtra(IS_DONE, true) }
+    private val isProgress by lazy { intent.getBooleanExtra(IS_PROGRESS, true) }
     private lateinit var laporan: DatabaseReference
 
 
@@ -31,9 +31,12 @@ class DetailLaporanActivity : AppCompatActivity() {
             "${item.lokasi.lat} - ${item.lokasi.long}",
             item.pelapor
         )
-
-        if (isDone) {
+        img_laporan2.setGone()
+        if (isProgress) {
             btn_proses.text = "AMBIL FOTO SELESAI"
+        } else if (isDone) {
+            img_laporan2.setVisible()
+            btn_proses.setGone()
         }
 
         laporan = FirebaseDatabase
@@ -52,20 +55,29 @@ class DetailLaporanActivity : AppCompatActivity() {
         inputlokasi.setText(lokasi)
         inputrt.setText(pelapor)
         btn_proses.setOnClickListener {
-            item.status = if (isDone) 3 else 2
-            laporan.setValue(item).addOnSuccessListener {
-                Toast.makeText(this, "Berhasil diubah", Toast.LENGTH_SHORT).show()
+            if (isProgress) toCamera()
+            else {
+                item.status = 2
+                laporan.setValue(item).addOnSuccessListener {
+                    Toast.makeText(this, "Berhasil diubah", Toast.LENGTH_SHORT).show()
+                }
+                    .addOnCompleteListener { this.finish() }
             }
-                .addOnCompleteListener { this.finish() }
         }
+    }
+
+    private fun toCamera() {
+        CameraActivity.start(this)
     }
 
     companion object {
         const val KEY_DATA_LAPORAN = "KEY_DATA_LAPORAN"
+        const val IS_PROGRESS = "IS_PROGRESS"
         const val IS_DONE = "IS_DONE"
-        fun startDetail(intent: Intent, itemLaporan: ItemLaporan, isDone: Boolean): Intent {
+        fun startDetail(intent: Intent, itemLaporan: ItemLaporan, status: Int): Intent {
             intent.putExtra(KEY_DATA_LAPORAN, itemLaporan)
-            intent.putExtra(IS_DONE, isDone)
+            intent.putExtra(IS_PROGRESS, status == ID_PROGRESS)
+            intent.putExtra(IS_DONE, ID_DONE)
             return intent
         }
     }
