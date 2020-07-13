@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/bggradient"
     android:layout_margin="10dp"
-    tools:context=".menurt.tambahlaporan.TambahLaporanFragment">
+    tools:context=".view.menu.rt.tambahlaporan.TambahLaporanFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvtambahlaporan"
-        android:text="abc"/>
+        android:text="abc" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

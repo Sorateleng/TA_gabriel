@@ -1,6 +1,7 @@
-package stta.gabriel.ta_gabriel.menu.riwayat
+package stta.gabriel.ta_gabriel.view.menu.officer.riwayat
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,19 +12,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
-import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity.Companion.startDetail
-import stta.gabriel.ta_gabriel.menu.laporan.LAPORAN
 import stta.gabriel.ta_gabriel.model.ItemLaporan
-import stta.gabriel.ta_gabriel.model.ItemRiwayat
+import stta.gabriel.ta_gabriel.util.TABLE_LAPORAN
+import stta.gabriel.ta_gabriel.util.default
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
+import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
 
-/**
- * A simple [Fragment] subclass.
- */
 class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
-    private var stockList: MutableList<ItemRiwayat> = mutableListOf()
+    private var stockList: MutableList<ItemLaporan> = mutableListOf()
     private lateinit var itemAdapter: RiwayatAdapter
     private lateinit var laporan: DatabaseReference
+    private lateinit var topActivity: HomeActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        topActivity = context as HomeActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +45,13 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        laporan = FirebaseDatabase.getInstance().reference.child(LAPORAN)
+        laporan = FirebaseDatabase.getInstance().reference.child(TABLE_LAPORAN)
         laporan.keepSynced(true)
         getStockList()
     }
 
     private fun getStockList() {
-        val list = mutableListOf<ItemRiwayat>()
+        val list = mutableListOf<ItemLaporan>()
         laporan.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
@@ -58,8 +63,8 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val item = data.getValue(ItemRiwayat::class.java)
-                        if (item?.status == 2)
+                        val item = data.getValue(ItemLaporan::class.java)
+                        if (item?.status == 3 && item.id_user == topActivity.akun.head.default())
                             list.add(item)
                     }
                 }
@@ -69,7 +74,7 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
         })
     }
 
-    override fun itemClick(item: ItemRiwayat) {
+    override fun itemClick(item: ItemLaporan) {
         val intent = Intent(context, DetailLaporanActivity::class.java)
         startDetail(
             intent, ItemLaporan(
@@ -78,7 +83,8 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
                 item.pelapor,
                 item.status,
                 item.lokasi,
-                item.head
+                item.head,
+                item.id_user
             ), true
         ).let { startActivity(it) }
     }

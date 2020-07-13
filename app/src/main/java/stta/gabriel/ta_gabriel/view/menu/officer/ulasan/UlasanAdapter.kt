@@ -1,21 +1,21 @@
-package stta.gabriel.ta_gabriel.menu.riwayat
+package stta.gabriel.ta_gabriel.view.menu.officer.ulasan
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_laporan.view.*
+import kotlinx.android.synthetic.main.item_ulasan.view.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.model.ItemLaporan
-import stta.gabriel.ta_gabriel.model.ItemRiwayat
+import stta.gabriel.ta_gabriel.model.ItemUlasan
 
-class LaporanAdapter(
-    private val items: MutableList<ItemLaporan>,
+
+class UlasanAdapter(
+    private val items: MutableList<ItemUlasan>,
     private val callback: ItemAdapterCallback
-) : RecyclerView.Adapter<LaporanAdapter.Holder>() {
+) : RecyclerView.Adapter<UlasanAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_laporan,parent, false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_ulasan,parent, false)
         return Holder(itemView = view)
     }
 
@@ -32,9 +32,9 @@ class LaporanAdapter(
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        fun bind(item: ItemLaporan) {
+        fun bind(item: ItemUlasan) {
             itemView.apply {
-                textViewItemLaporan.text = item.pelapor
+                textViewItemUlasan.text = item.isi
                 setOnClickListener { callback.itemClick(item) }
             }
 
@@ -45,7 +45,7 @@ class LaporanAdapter(
     }
 
     interface ItemAdapterCallback {
-        fun itemClick(item: ItemLaporan)
+        fun itemClick(item: ItemUlasan)
 
     }
 }

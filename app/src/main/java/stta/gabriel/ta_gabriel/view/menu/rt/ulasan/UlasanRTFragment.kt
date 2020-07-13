@@ -1,7 +1,5 @@
-package stta.gabriel.ta_gabriel.menurt.ulasan
+package stta.gabriel.ta_gabriel.view.menu.rt.ulasan
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

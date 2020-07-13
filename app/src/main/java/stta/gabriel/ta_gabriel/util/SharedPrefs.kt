@@ -71,3 +71,4 @@ class SharedPrefs(context: Context) {
 
 
 const val IS_LOGGED_IN = "IS_LOGGED_IN"
+const val USER_VALUE = "USER_VALUE"

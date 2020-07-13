@@ -1,7 +1,8 @@
-package stta.gabriel.ta_gabriel.detaillaporan
+package stta.gabriel.ta_gabriel.view.detaillaporan
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_detail_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
+import stta.gabriel.ta_gabriel.util.TABLE_LAPORAN
 import stta.gabriel.ta_gabriel.util.loadSquareImageFromUrl
 
 class DetailLaporanActivity : AppCompatActivity() {
@@ -30,15 +32,17 @@ class DetailLaporanActivity : AppCompatActivity() {
             item.pelapor
         )
 
-        btn_proses.visibility = if (isDone.not()) View.VISIBLE else View.GONE
-        img_laporan2.visibility = if (isDone) View.VISIBLE else View.GONE
+        if (isDone) {
+            btn_proses.text = "AMBIL FOTO SELESAI"
+        }
 
         laporan = FirebaseDatabase
             .getInstance()
             .reference
-            .child("laporan")
+            .child(TABLE_LAPORAN)
             .child(item.head.toString())
 
+        Log.d("itemLaporan", item.toString())
         laporan.keepSynced(true)
     }
 
@@ -48,7 +52,7 @@ class DetailLaporanActivity : AppCompatActivity() {
         inputlokasi.setText(lokasi)
         inputrt.setText(pelapor)
         btn_proses.setOnClickListener {
-            item.status = 2
+            item.status = if (isDone) 3 else 2
             laporan.setValue(item).addOnSuccessListener {
                 Toast.makeText(this, "Berhasil diubah", Toast.LENGTH_SHORT).show()
             }

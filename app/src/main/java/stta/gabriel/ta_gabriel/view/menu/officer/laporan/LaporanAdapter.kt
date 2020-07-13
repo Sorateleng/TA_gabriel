@@ -1,22 +1,21 @@
-package stta.gabriel.ta_gabriel.menu.ulasan
+package stta.gabriel.ta_gabriel.view.menu.officer.laporan
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_laporan.view.*
-import kotlinx.android.synthetic.main.item_ulasan.view.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.model.ItemUlasan
+import stta.gabriel.ta_gabriel.model.ItemLaporan
+import stta.gabriel.ta_gabriel.util.ID_UNDONE
 
-
-class UlasanAdapter(
-    private val items: MutableList<ItemUlasan>,
+class LaporanAdapter(
+    private val items: MutableList<ItemLaporan>,
     private val callback: ItemAdapterCallback
-) : RecyclerView.Adapter<UlasanAdapter.Holder>() {
+) : RecyclerView.Adapter<LaporanAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_ulasan,parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_laporan, parent, false)
         return Holder(itemView = view)
     }
 
@@ -33,20 +32,18 @@ class UlasanAdapter(
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        fun bind(item: ItemUlasan) {
+        fun bind(item: ItemLaporan) {
             itemView.apply {
-                textViewItemUlasan.text = item.isi
+                itemTitle.text = item.pelapor
+                itemStatus.text = if (item.status == ID_UNDONE) "Belum dikerjakan"
+                else "Dalam Pengerjaan"
                 setOnClickListener { callback.itemClick(item) }
             }
-
-
         }
-
-
     }
 
     interface ItemAdapterCallback {
-        fun itemClick(item: ItemUlasan)
+        fun itemClick(item: ItemLaporan)
 
     }
 }
