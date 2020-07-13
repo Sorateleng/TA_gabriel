@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel
+package stta.gabriel.ta_gabriel.view.auth
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
+import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.view.home.HomeActivity
+import stta.gabriel.ta_gabriel.view.home.HomeRTActivity
 import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.IS_LOGGED_IN
 import stta.gabriel.ta_gabriel.util.SharedPrefs

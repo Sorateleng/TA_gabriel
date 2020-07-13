@@ -1,7 +1,5 @@
-package stta.gabriel.ta_gabriel.menurt.tambahlaporan
+package stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

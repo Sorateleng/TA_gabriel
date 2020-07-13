@@ -10,11 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeRTActivity"></activity>
-        <activity android:name=".detaillaporan.DetailLaporanActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".view.home.HomeRTActivity" />
+        <activity android:name=".view.detaillaporan.DetailLaporanActivity" />
+        <activity android:name=".view.home.HomeActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.auth.LoginActivity"
             android:theme="@style/AppThemeNoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

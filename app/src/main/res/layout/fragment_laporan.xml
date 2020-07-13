@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bggradient"
-    tools:context=".menu.laporan.LaporanFragment">
+    tools:context=".view.menu.officer.laporan.LaporanFragment">
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-      android:id="@+id/rv_laporan">
+       android:id="@+id/rv_laporan">
 
    </androidx.recyclerview.widget.RecyclerView>
 

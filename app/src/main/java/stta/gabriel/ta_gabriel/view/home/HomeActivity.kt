@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel
+package stta.gabriel.ta_gabriel.view.home
 
 import android.app.Activity
 import android.content.Intent
@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
-import stta.gabriel.ta_gabriel.menu.laporan.LaporanFragment
-import stta.gabriel.ta_gabriel.menu.riwayat.RiwayatFragment
-import stta.gabriel.ta_gabriel.menu.ulasan.UlasanFragment
+import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
+import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
+import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment
 
 class HomeActivity : AppCompatActivity() {
 

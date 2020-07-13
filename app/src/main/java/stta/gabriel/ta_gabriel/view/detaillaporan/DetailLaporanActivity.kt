@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel.detaillaporan
+package stta.gabriel.ta_gabriel.view.detaillaporan
 
 import android.content.Intent
 import android.os.Bundle

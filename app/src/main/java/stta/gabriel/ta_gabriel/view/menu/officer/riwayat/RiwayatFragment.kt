@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel.menu.riwayat
+package stta.gabriel.ta_gabriel.view.menu.officer.riwayat
 
 
 import android.content.Intent
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
-import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity.Companion.startDetail
-import stta.gabriel.ta_gabriel.menu.laporan.LAPORAN
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
+import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LAPORAN
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
 

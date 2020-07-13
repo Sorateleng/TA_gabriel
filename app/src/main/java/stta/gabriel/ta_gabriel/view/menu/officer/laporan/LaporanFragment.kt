@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel.menu.ulasan
+package stta.gabriel.ta_gabriel.view.menu.officer.laporan
 
 
 import android.content.Intent
@@ -6,22 +6,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.detaillaporan.DetailLaporanActivity
-import stta.gabriel.ta_gabriel.model.ItemUlasan
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
+import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.LaporanAdapter
+import stta.gabriel.ta_gabriel.model.ItemLaporan
+
 
 /**
  * A simple [Fragment] subclass.
  */
-class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
-    private var ulasanList: MutableList<ItemUlasan> = mutableListOf()
-    private lateinit var itemAdapter: UlasanAdapter
-    private lateinit var ulasan: DatabaseReference
+class LaporanFragment: Fragment(), LaporanAdapter.ItemAdapterCallback {
+    private var stockList: MutableList<ItemLaporan> = mutableListOf()
+    private lateinit var itemAdapter: LaporanAdapter
+    private lateinit var laporan: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,50 +35,50 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        itemAdapter = UlasanAdapter(ulasanList, this)
+        itemAdapter = LaporanAdapter(stockList, this)
         rv_laporan.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        ulasan = FirebaseDatabase.getInstance().reference.child(ULASAN)
-        ulasan.keepSynced(true)
-        getulasanList()
+        laporan = FirebaseDatabase.getInstance().reference.child(LAPORAN)
+        laporan.keepSynced(true)
+        getStockList()
     }
 
-    private fun getulasanList() {
-        val list = mutableListOf<ItemUlasan>()
-        ulasan.addValueEventListener(object : ValueEventListener {
+    private fun getStockList() {
+        val list = mutableListOf<ItemLaporan>()
+        laporan.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.clear()
-                ulasanList.clear()
+                stockList.clear()
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val item = data.getValue(ItemUlasan::class.java)
-                        item?.let { list.add(it) }
+                        val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
+                        if (item?.status == 1)
+                            list.add(item)
                     }
                 }
-                ulasanList.addAll(list)
+                stockList.addAll(list)
                 itemAdapter.notifyDataSetChanged()
             }
         })
     }
 
-    override fun itemClick(item: ItemUlasan) {
-        Toast.makeText(context, item.isi, Toast.LENGTH_SHORT).show()
+    override fun itemClick(item: ItemLaporan) {
+        val intent = Intent (context,DetailLaporanActivity::class.java)
+        startActivity(startDetail(intent, item, false))
     }
 
     companion object {
         fun newInstance(): Fragment {
-            return UlasanFragment()
+            return LaporanFragment()
         }
     }
 
 }
-
-const val KEY_DATA_ULASAN = "KEY_DATA_ULASAN"
-const val ULASAN = "ulasan"
+const val LAPORAN = "laporan"

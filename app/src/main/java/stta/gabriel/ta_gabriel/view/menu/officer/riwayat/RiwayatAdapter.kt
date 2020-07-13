@@ -1,22 +1,20 @@
-package stta.gabriel.ta_gabriel.menu.ulasan
+package stta.gabriel.ta_gabriel.view.menu.officer.riwayat
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_laporan.view.*
-import kotlinx.android.synthetic.main.item_ulasan.view.*
+import kotlinx.android.synthetic.main.item_riwayat.view.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.model.ItemUlasan
+import stta.gabriel.ta_gabriel.model.ItemRiwayat
 
-
-class UlasanAdapter(
-    private val items: MutableList<ItemUlasan>,
+class RiwayatAdapter(
+    private val items: MutableList<ItemRiwayat>,
     private val callback: ItemAdapterCallback
-) : RecyclerView.Adapter<UlasanAdapter.Holder>() {
+) : RecyclerView.Adapter<RiwayatAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_ulasan,parent, false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_riwayat,parent, false)
         return Holder(itemView = view)
     }
 
@@ -33,9 +31,9 @@ class UlasanAdapter(
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        fun bind(item: ItemUlasan) {
+        fun bind(item: ItemRiwayat) {
             itemView.apply {
-                textViewItemUlasan.text = item.isi
+                textViewItemRiwayat.text = item.pelapor
                 setOnClickListener { callback.itemClick(item) }
             }
 
@@ -46,7 +44,7 @@ class UlasanAdapter(
     }
 
     interface ItemAdapterCallback {
-        fun itemClick(item: ItemUlasan)
+        fun itemClick(item: ItemRiwayat)
 
     }
 }
