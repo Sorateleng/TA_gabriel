@@ -8,10 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.base.BaseActivity
+import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.SELECTED_MENU
+import stta.gabriel.ta_gabriel.util.SharedPrefs
+import stta.gabriel.ta_gabriel.util.USER_VALUE
 import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment
@@ -20,6 +24,8 @@ class HomeActivity : BaseActivity() {
 
     private var lastTab = 0
     var fragment: Fragment? = null
+    private lateinit var preferences: SharedPrefs
+    lateinit var akun: Akun
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
@@ -52,6 +58,8 @@ class HomeActivity : BaseActivity() {
         setTitle("Menu Petugas")
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         savedInstanceState?.getInt(SELECTED_MENU) ?: setNavTab()
+        preferences = SharedPrefs(this)
+        akun = Gson().fromJson(preferences.getString(USER_VALUE), Akun::class.java)
     }
 
     private fun setNavTab() {

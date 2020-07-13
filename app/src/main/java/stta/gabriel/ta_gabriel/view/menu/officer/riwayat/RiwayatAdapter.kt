@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_riwayat.view.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.model.ItemRiwayat
+import stta.gabriel.ta_gabriel.model.ItemLaporan
 
 class RiwayatAdapter(
-    private val items: MutableList<ItemRiwayat>,
+    private val items: MutableList<ItemLaporan>,
     private val callback: ItemAdapterCallback
 ) : RecyclerView.Adapter<RiwayatAdapter.Holder>() {
 
@@ -31,7 +31,7 @@ class RiwayatAdapter(
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        fun bind(item: ItemRiwayat) {
+        fun bind(item: ItemLaporan) {
             itemView.apply {
                 textViewItemRiwayat.text = item.pelapor
                 setOnClickListener { callback.itemClick(item) }
@@ -44,7 +44,7 @@ class RiwayatAdapter(
     }
 
     interface ItemAdapterCallback {
-        fun itemClick(item: ItemRiwayat)
+        fun itemClick(item: ItemLaporan)
 
     }
 }

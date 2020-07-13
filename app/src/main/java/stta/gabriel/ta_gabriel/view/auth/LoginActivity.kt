@@ -6,6 +6,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.Akun
@@ -64,11 +65,19 @@ class LoginActivity : AppCompatActivity() {
                                             when (akun.access) {
                                                 ID_OFFICER -> {
                                                     HomeActivity.start(this@LoginActivity)
-                                                    preferences.saveInt(IS_LOGGED_IN, 1)
+                                                    preferences.saveInt(IS_LOGGED_IN, ID_OFFICER)
+                                                    preferences.saveString(
+                                                        USER_VALUE,
+                                                        Gson().toJson(akun)
+                                                    )
                                                 }
                                                 ID_RT -> {
                                                     HomeRTActivity.start(this@LoginActivity)
-                                                    preferences.saveInt(IS_LOGGED_IN, 2)
+                                                    preferences.saveInt(IS_LOGGED_IN, ID_RT)
+                                                    preferences.saveString(
+                                                        USER_VALUE,
+                                                        Gson().toJson(akun)
+                                                    )
                                                 }
                                                 else -> {
                                                     toastMe("Akun tidak ada akses")

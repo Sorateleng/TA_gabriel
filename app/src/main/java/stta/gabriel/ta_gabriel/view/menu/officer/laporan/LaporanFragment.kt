@@ -1,6 +1,7 @@
 package stta.gabriel.ta_gabriel.view.menu.officer.laporan
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,13 +16,21 @@ import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.util.ID_PROGRESS
 import stta.gabriel.ta_gabriel.util.ID_UNDONE
 import stta.gabriel.ta_gabriel.util.TABLE_LAPORAN
+import stta.gabriel.ta_gabriel.util.default
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
+import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
 
 class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
     private var stockList: MutableList<ItemLaporan> = mutableListOf()
     private lateinit var itemAdapter: LaporanAdapter
     private lateinit var laporan: DatabaseReference
+    private lateinit var topActivity: HomeActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        topActivity = context as HomeActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,14 +59,16 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listUndone.clear()
+                listProgress.clear()
                 stockList.clear()
 
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
-                        val itemUndone = data.getValue<ItemLaporan>(ItemLaporan::class.java)
-
-                        if (itemUndone?.status == ID_UNDONE) listUndone.add(itemUndone)
-                        else if (itemUndone?.status == ID_PROGRESS) listProgress.add(itemUndone)
+                        val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
+                        if (item?.id_user == topActivity.akun.head.default()) {
+                            if (item.status == ID_UNDONE) listUndone.add(item)
+                            else if (item.status == ID_PROGRESS) listProgress.add(item)
+                        }
                     }
                 }
                 stockList.addAll(listUndone)
@@ -69,7 +80,7 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
 
     override fun itemClick(item: ItemLaporan) {
         val intent = Intent(context, DetailLaporanActivity::class.java)
-        startActivity(startDetail(intent, item, false))
+        startActivity(startDetail(intent, item, item.status == ID_PROGRESS))
     }
 
     companion object {

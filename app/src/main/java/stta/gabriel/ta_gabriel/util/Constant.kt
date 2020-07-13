@@ -13,6 +13,7 @@ const val ID_DONE = 3
 //firebase
 const val TABLE_USER = "user"
 const val TABLE_LAPORAN = "laporan"
+const val TABLE_ULASAN = "ulasan"
 
 
 //corection

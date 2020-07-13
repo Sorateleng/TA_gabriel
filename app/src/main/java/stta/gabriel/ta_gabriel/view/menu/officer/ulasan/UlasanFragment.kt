@@ -1,6 +1,7 @@
 package stta.gabriel.ta_gabriel.view.menu.officer.ulasan
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,22 +13,25 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemUlasan
+import stta.gabriel.ta_gabriel.util.TABLE_ULASAN
+import stta.gabriel.ta_gabriel.util.default
+import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
 
-/**
- * A simple [Fragment] subclass.
- */
 class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
     private var ulasanList: MutableList<ItemUlasan> = mutableListOf()
     private lateinit var itemAdapter: UlasanAdapter
     private lateinit var ulasan: DatabaseReference
+    private lateinit var topActivity: HomeActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        topActivity = context as HomeActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_laporan, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_laporan, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +40,7 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        ulasan = FirebaseDatabase.getInstance().reference.child(ULASAN)
+        ulasan = FirebaseDatabase.getInstance().reference.child(TABLE_ULASAN)
         ulasan.keepSynced(true)
         getulasanList()
     }
@@ -55,7 +59,10 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
                         val item = data.getValue(ItemUlasan::class.java)
-                        item?.let { list.add(it) }
+                        item?.let {
+                            if (item.id_user == topActivity.akun.head.default())
+                                list.add(it)
+                        }
                     }
                 }
                 ulasanList.addAll(list)
@@ -75,6 +82,3 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
     }
 
 }
-
-const val KEY_DATA_ULASAN = "KEY_DATA_ULASAN"
-const val ULASAN = "ulasan"

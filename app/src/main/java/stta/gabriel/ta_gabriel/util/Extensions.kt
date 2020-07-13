@@ -46,3 +46,7 @@ fun View.setVisible() {
 fun View.setGone() {
     if (this.visibility != View.GONE) this.visibility = View.GONE
 }
+
+fun Int?.default() = this ?: 0
+fun String?.default() = this ?: ""
+fun Boolean?.default() = this ?: false
