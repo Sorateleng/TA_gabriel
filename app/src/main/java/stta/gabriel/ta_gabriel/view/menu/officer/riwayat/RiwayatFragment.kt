@@ -13,9 +13,10 @@ import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
-import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LAPORAN
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.model.ItemRiwayat
+import stta.gabriel.ta_gabriel.util.TABLE_LAPORAN
+import stta.gabriel.ta_gabriel.util.TABLE_USER
 
 /**
  * A simple [Fragment] subclass.
@@ -40,7 +41,7 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
         }
-        laporan = FirebaseDatabase.getInstance().reference.child(LAPORAN)
+        laporan = FirebaseDatabase.getInstance().reference.child(TABLE_LAPORAN)
         laporan.keepSynced(true)
         getStockList()
     }

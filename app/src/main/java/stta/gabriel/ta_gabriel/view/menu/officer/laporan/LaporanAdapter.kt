@@ -1,4 +1,4 @@
-package stta.gabriel.ta_gabriel.view.menu.officer.riwayat
+package stta.gabriel.ta_gabriel.view.menu.officer.laporan
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_laporan.view.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
+import stta.gabriel.ta_gabriel.util.ID_UNDONE
 
 class LaporanAdapter(
     private val items: MutableList<ItemLaporan>,
@@ -14,7 +15,7 @@ class LaporanAdapter(
 ) : RecyclerView.Adapter<LaporanAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_laporan,parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_laporan, parent, false)
         return Holder(itemView = view)
     }
 
@@ -33,14 +34,12 @@ class LaporanAdapter(
 
         fun bind(item: ItemLaporan) {
             itemView.apply {
-                textViewItemLaporan.text = item.pelapor
+                itemTitle.text = item.pelapor
+                itemStatus.text = if (item.status == ID_UNDONE) "Belum dikerjakan"
+                else "Dalam Pengerjaan"
                 setOnClickListener { callback.itemClick(item) }
             }
-
-
         }
-
-
     }
 
     interface ItemAdapterCallback {
