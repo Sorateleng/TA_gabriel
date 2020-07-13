@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_camera.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
 import java.io.File
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
@@ -147,6 +148,8 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
             camera_capture_button.setVisible()
         }
         btnSubmit.setOnClickListener {
+            progressBar.setVisible()
+            btnSubmit.isEnabled = false
             UploadImage(
                 this@CameraActivity,
                 "user",
@@ -213,9 +216,14 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
     }
 
     override fun imageUrl(imgUrl: String?, error: String?, access: Int) {
+        progressBar.setGone()
+        btnSubmit.isEnabled = true
         if (imgUrl.isNullOrEmpty() && error != null) {
             Toast.makeText(this, "Gagal Upload", Toast.LENGTH_SHORT).show()
         } else {
+            val intent = Intent(this, DetailLaporanActivity::class.java)
+            intent.putExtra(EXTRA_IMG_URL, imgUrl)
+            setResult(Activity.RESULT_OK, intent)
             finish()
             Log.d(TAG, imgUrl)
         }
@@ -224,12 +232,17 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
     companion object {
         private const val TAG = "CameraXBasic"
         private const val ACCESS_CAM = 499
+        const val REQUEST_CODE_CAMERA = 999
+        const val EXTRA_IMG_URL = "EXTRA_IMG_URL"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
         fun start(activity: Activity) {
-            activity.startActivity(Intent(activity, CameraActivity::class.java))
+            activity.startActivityForResult(
+                Intent(activity, CameraActivity::class.java),
+                REQUEST_CODE_CAMERA
+            )
         }
     }
 }

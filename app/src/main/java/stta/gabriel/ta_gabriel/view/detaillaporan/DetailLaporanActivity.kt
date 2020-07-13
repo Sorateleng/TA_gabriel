@@ -1,5 +1,6 @@
 package stta.gabriel.ta_gabriel.view.detaillaporan
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.util.*
 import stta.gabriel.ta_gabriel.view.camera.CameraActivity
+import stta.gabriel.ta_gabriel.view.camera.CameraActivity.Companion.REQUEST_CODE_CAMERA
 
 class DetailLaporanActivity : AppCompatActivity() {
 
@@ -68,6 +70,14 @@ class DetailLaporanActivity : AppCompatActivity() {
 
     private fun toCamera() {
         CameraActivity.start(this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
+            val urlImg = data?.getStringExtra(CameraActivity.EXTRA_IMG_URL).default()
+            Log.d("asdasdadasda", urlImg)
+        }
     }
 
     companion object {
