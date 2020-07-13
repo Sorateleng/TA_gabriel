@@ -15,9 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_camera.*
 import stta.gabriel.ta_gabriel.R
-import stta.gabriel.ta_gabriel.util.loadImageFromFile
-import stta.gabriel.ta_gabriel.util.setGone
-import stta.gabriel.ta_gabriel.util.setVisible
+import stta.gabriel.ta_gabriel.util.*
 import java.io.File
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
@@ -27,7 +25,7 @@ import java.util.concurrent.Executors
 
 typealias LumaListener = (luma: Double) -> Unit
 
-class CameraActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
     private var preview: Preview? = null
     private var imageCapture: ImageCapture? = null
     private var imageAnalyzer: ImageAnalysis? = null
@@ -75,7 +73,7 @@ class CameraActivity : AppCompatActivity() {
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
-                        Log.d(TAG, "Average luminosity: $luma")
+//                        Log.d(TAG, "Average luminosity: $luma")
                     })
                 }
 
@@ -129,13 +127,13 @@ class CameraActivity : AppCompatActivity() {
                     val savedUri = Uri.fromFile(photoFile)
                     val msg = "Photo capture succeeded: $savedUri"
                     imgPreview.loadImageFromFile(photoFile)
-                    successTakingPhoto()
+                    successTakingPhoto(photoFile)
                     Log.d(TAG, msg)
                 }
             })
     }
 
-    private fun successTakingPhoto() {
+    private fun successTakingPhoto(photoFile: File) {
         imgPreview.setVisible()
         btnSubmit.setVisible()
         imgHint.setVisible()
@@ -147,6 +145,16 @@ class CameraActivity : AppCompatActivity() {
             btnSubmit.setGone()
             viewFinder.setVisible()
             camera_capture_button.setVisible()
+        }
+        btnSubmit.setOnClickListener {
+            UploadImage(
+                this@CameraActivity,
+                "user",
+                photoFile.name,
+                photoFile,
+                this@CameraActivity,
+                DIR_ITEM_IMG
+            ).upload(ACCESS_CAM)
         }
     }
 
@@ -204,8 +212,18 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    override fun imageUrl(imgUrl: String?, error: String?, access: Int) {
+        if (imgUrl.isNullOrEmpty() && error != null) {
+            Toast.makeText(this, "Gagal Upload", Toast.LENGTH_SHORT).show()
+        } else {
+            finish()
+            Log.d(TAG, imgUrl)
+        }
+    }
+
     companion object {
         private const val TAG = "CameraXBasic"
+        private const val ACCESS_CAM = 499
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
