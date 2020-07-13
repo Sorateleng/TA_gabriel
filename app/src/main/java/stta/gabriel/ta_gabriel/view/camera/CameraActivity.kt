@@ -15,6 +15,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_camera.*
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.util.loadImageFromFile
+import stta.gabriel.ta_gabriel.util.setGone
+import stta.gabriel.ta_gabriel.util.setVisible
 import java.io.File
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
@@ -125,10 +128,26 @@ class CameraActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
                     val msg = "Photo capture succeeded: $savedUri"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    imgPreview.loadImageFromFile(photoFile)
+                    successTakingPhoto()
                     Log.d(TAG, msg)
                 }
             })
+    }
+
+    private fun successTakingPhoto() {
+        imgPreview.setVisible()
+        btnSubmit.setVisible()
+        imgHint.setVisible()
+        viewFinder.setGone()
+        camera_capture_button.setGone()
+        imgPreview.setOnClickListener {
+            imgPreview.setGone()
+            imgHint.setGone()
+            btnSubmit.setGone()
+            viewFinder.setVisible()
+            camera_capture_button.setVisible()
+        }
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {

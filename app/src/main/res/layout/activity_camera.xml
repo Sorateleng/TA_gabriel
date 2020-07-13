@@ -23,4 +23,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ImageView
+        android:id="@+id/imgPreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:src="@mipmap/ic_launcher"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Submit"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/imgHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#C3000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btnSubmit"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tekan gambar untuk mengulang"
+            android:textAlignment="center"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
