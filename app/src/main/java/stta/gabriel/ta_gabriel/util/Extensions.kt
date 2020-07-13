@@ -1,7 +1,9 @@
 package stta.gabriel.ta_gabriel.util
 
 import android.graphics.Bitmap
+import android.view.View
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -37,3 +39,10 @@ fun ImageView.loadSquareImageFromUrl(url: String, placeHolder: Int = R.drawable.
         .into(this)
 }
 
+fun View.setVisible() {
+    if (this.visibility != View.VISIBLE) this.visibility = View.VISIBLE
+}
+
+fun View.setGone() {
+    if (this.visibility != View.GONE) this.visibility = View.GONE
+}

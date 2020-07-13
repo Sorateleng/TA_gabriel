@@ -10,12 +10,13 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.base.BaseActivity
 import stta.gabriel.ta_gabriel.util.SELECTED_MENU
 import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private var lastTab = 0
     var fragment: Fragment? = null
@@ -23,12 +24,16 @@ class HomeActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
             if (item.itemId != lastTab)
-                if (item.itemId == R.id.menu_laporan) {
-                    fragment = LaporanFragment.newInstance()
-                } else if (item.itemId == R.id.menu_riwayat) {
-                    fragment = RiwayatFragment.newInstance()
-                } else if (item.itemId == R.id.menu_ulasan) {
-                    fragment = UlasanFragment.newInstance()
+                when (item.itemId) {
+                    R.id.menu_laporan -> {
+                        fragment = LaporanFragment.newInstance()
+                    }
+                    R.id.menu_riwayat -> {
+                        fragment = RiwayatFragment.newInstance()
+                    }
+                    R.id.menu_ulasan -> {
+                        fragment = UlasanFragment.newInstance()
+                    }
                 }
             if (fragment != null) {
                 lastTab = item.itemId
@@ -44,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_laporan)
-
+        setTitle("Menu Petugas")
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         savedInstanceState?.getInt(SELECTED_MENU) ?: setNavTab()
     }

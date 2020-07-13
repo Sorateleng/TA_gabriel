@@ -32,15 +32,14 @@ class LoginActivity : AppCompatActivity() {
                 HomeRTActivity.start(this)
             }
             else -> {
-                toastMe("Tidak memiliki hak akses")
-                throw UnsupportedOperationException()
+                setLoading(false)
             }
         }
 
         akun = FirebaseDatabase.getInstance().reference.child(TABLE_USER)
 
         btnlogin.setOnClickListener {
-
+            setLoading(true)
             val id = inputId.text.toString()
             val password = inputPassword.text.toString()
             when {
@@ -50,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                 else -> {
                     akun.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
-
+                            setLoading(false)
                         }
 
                         override fun onDataChange(p0: DataSnapshot) {
@@ -82,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
                                 } else toastMe("Akun tidak Ada")
 
                             }
+                            setLoading(false)
                         }
                     })
                 }
@@ -90,11 +90,17 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            progressLay.setVisible()
+            btnlogin.setGone()
+        } else {
+            progressLay.setGone()
+            btnlogin.setVisible()
+        }
+    }
+
     private fun toastMe(s: String) {
-        Toast.makeText(
-            this@LoginActivity,
-            s,
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(this@LoginActivity, s, Toast.LENGTH_SHORT).show()
     }
 }
