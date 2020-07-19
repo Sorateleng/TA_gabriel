@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".fragment_kirim_laporan"></activity>
         <activity android:name=".view.menu.rt.HomeRTActivity" />
         <activity android:name=".view.detaillaporan.DetailLaporanActivity" />
         <activity android:name=".view.menu.officer.HomeActivity" />
