@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="stta.gabriel.ta_gabriel">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".base.BaseApp"
         android:allowBackup="true"
@@ -10,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragment_kirim_laporan"></activity>
+
+
         <activity android:name=".view.menu.rt.HomeRTActivity" />
         <activity android:name=".view.detaillaporan.DetailLaporanActivity" />
         <activity android:name=".view.menu.officer.HomeActivity" />
