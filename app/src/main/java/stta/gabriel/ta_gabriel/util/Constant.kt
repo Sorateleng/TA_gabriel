@@ -15,6 +15,10 @@ const val TABLE_USER = "user"
 const val TABLE_LAPORAN = "laporan"
 const val TABLE_ULASAN = "ulasan"
 
+const val FBS_BUCKET_NAME = "gs://ta15030015.appspot.com"
+const val DIR_ITEM_IMG = " img_report_dir"
+const val DIR_UNSET_IMG = " img_unset_dir"
+
 
 //corection
 const val SELECTED_MENU = "selected_menu"

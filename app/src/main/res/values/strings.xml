@@ -1,8 +1,19 @@
 <resources>
-    <string name="app_name">TA_gabriel</string>
+    <string name="app_name">PoncoClean</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="camera_permission_denied">Lokasi ditolak</string>
-    <string name="camera_permission_granted">Lokasi diijinkan</string>
+    <string name="exit_title_text">Apakah anda ingin keluar?</string>
+    <string name="logout_text">Logout</string>
+    <string name="exit_text">Keluar</string>
+    <string name="cancel_text">Batal</string>
+    <string name="officer_menu_title_text">Menu Petugas</string>
+    <string name="id_warn_error_text">Masukkan ID Anda terlebih dahulu</string>
+    <string name="password_warn_error_text">Masukkan Password Anda terlebih dahulu</string>
+    <string name="no_access_account_text">Akun tidak ada akses</string>
+    <string name="wrong_password_text">Password Salah</string>
+    <string name="account_not_found_text">\"Akun tidak ditemukan \"</string>
+    <string name="wait_upload_warn_text">Tunggu selesai mengupload ....</string>
+    <string name="permission_rejected_warn_text">Permissions not granted by the user.</string>
+    <string name="failed_upload_warn_text">Gagal Upload</string>
+    <string name="grant_access_permission_hint_text">Ijinkan akses</string>
+    <string name="ok_text">OK</string>
 </resources>

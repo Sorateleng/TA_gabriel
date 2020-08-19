@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,9 +12,8 @@ import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.base.BaseActivity
 import stta.gabriel.ta_gabriel.model.Akun
-import stta.gabriel.ta_gabriel.util.SELECTED_MENU
-import stta.gabriel.ta_gabriel.util.SharedPrefs
-import stta.gabriel.ta_gabriel.util.USER_VALUE
+import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.auth.LoginActivity
 import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment
@@ -55,7 +53,7 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_laporan)
-        setTitle("Menu Petugas")
+        setTitle(getString(R.string.officer_menu_title_text))
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         savedInstanceState?.getInt(SELECTED_MENU) ?: setNavTab()
         preferences = SharedPrefs(this)
@@ -69,6 +67,26 @@ class HomeActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(SELECTED_MENU, navigation.selectedItemId)
+    }
+
+    override fun onBackPressed() {
+        showDialog(
+            cancelable = false,
+            cancelableTouchOutside = true
+        ) {
+            setTitle(getString(R.string.exit_title_text))
+            positiveButton(getString(R.string.logout_text)) {
+                preferences.saveInt(IS_LOGGED_IN, 0)
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finishAffinity()
+            }
+            negativeButton(getString(R.string.exit_text)) {
+                super.onBackPressed()
+            }
+            neutralButton(getString(R.string.cancel_text)) {
+
+            }
+        }
     }
 
 

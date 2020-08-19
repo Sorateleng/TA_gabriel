@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import stta.gabriel.ta_gabriel.R
+import java.io.File
 
 fun ImageView.loadImageFromUrl(url: String, placeHolder: Int = R.drawable.ic_launcher_background) {
     Glide.with(context.applicationContext)
@@ -16,14 +17,27 @@ fun ImageView.loadImageFromUrl(url: String, placeHolder: Int = R.drawable.ic_lau
         .into(this)
 }
 
-fun ImageView.loadImageFromBitmap(url: Bitmap, placeHolder: Int = R.drawable.ic_launcher_background) {
+fun ImageView.loadImageFromBitmap(
+    url: Bitmap,
+    placeHolder: Int = R.drawable.ic_launcher_background
+) {
     Glide.with(context.applicationContext)
         .load(url)
         .placeholder(placeHolder)
         .into(this)
 }
 
-fun ImageView.loadCircleImageFromUrl(url: String, placeHolder: Int = R.drawable.ic_launcher_background) {
+fun ImageView.loadImageFromFile(url: File, placeHolder: Int = R.drawable.ic_launcher_background) {
+    Glide.with(context.applicationContext)
+        .load(url)
+        .placeholder(placeHolder)
+        .into(this)
+}
+
+fun ImageView.loadCircleImageFromUrl(
+    url: String,
+    placeHolder: Int = R.drawable.ic_launcher_background
+) {
     Glide.with(context.applicationContext)
         .load(url)
         .placeholder(placeHolder)
@@ -31,7 +45,10 @@ fun ImageView.loadCircleImageFromUrl(url: String, placeHolder: Int = R.drawable.
         .into(this)
 }
 
-fun ImageView.loadSquareImageFromUrl(url: String, placeHolder: Int = R.drawable.ic_launcher_background) {
+fun ImageView.loadSquareImageFromUrl(
+    url: String,
+    placeHolder: Int = R.drawable.ic_launcher_background
+) {
     Glide.with(context.applicationContext)
         .load(url)
         .placeholder(placeHolder)
@@ -45,6 +62,10 @@ fun View.setVisible() {
 
 fun View.setGone() {
     if (this.visibility != View.GONE) this.visibility = View.GONE
+}
+
+fun View.visibility(isShow: Boolean) {
+    if (isShow) this.setVisible() else this.setGone()
 }
 
 fun Int?.default() = this ?: 0
