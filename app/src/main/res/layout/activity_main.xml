@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<stta.gabriel.ta_gabriel.view.custom.LinearLayoutThatDetectsSoftKeyboard xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bggradient"
+    android:background="#FFC7C7"
+    android:orientation="vertical"
     tools:context=".view.auth.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/batas_bawah"
@@ -29,44 +31,36 @@
             android:id="@+id/btnlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?selectableItemBackground"
-            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="15dp"
             app:cardElevation="20dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="@id/batas_bawah"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Login"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent"
+                android:layout_marginVertical="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="50dp"
             android:foreground="?selectableItemBackground"
             app:cardCornerRadius="15dp"
             app:cardElevation="20dp"
@@ -79,6 +73,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="10dp"
                 android:paddingHorizontal="15dp">
 
                 <androidx.constraintlayout.widget.Guideline
@@ -88,12 +83,26 @@
                     android:orientation="horizontal"
                     app:layout_constraintGuide_percent="0.9" />
 
+                <TextView
+                    android:id="@+id/textHintLogin"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Login Dengan Akun yang telah terdaftar"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/til_id"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/imageview"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="20dp"
                     android:src="@drawable/logopc"
                     app:layout_constraintBottom_toTopOf="@id/til_id"
+                    app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -151,19 +160,23 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:id="@+id/progressLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#94000000"
+            android:clickable="true"
+            android:focusable="true"
+            android:translationZ="30dp"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/progressLay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#94000000">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</stta.gabriel.ta_gabriel.view.custom.LinearLayoutThatDetectsSoftKeyboard>

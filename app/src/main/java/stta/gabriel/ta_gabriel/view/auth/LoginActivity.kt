@@ -11,10 +11,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.custom.LinearLayoutThatDetectsSoftKeyboard
 import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
 import stta.gabriel.ta_gabriel.view.menu.rt.HomeRTActivity
 
-class LoginActivity : AppCompatActivity() {
+
+class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.Listener {
     private lateinit var akun: DatabaseReference
     private lateinit var preferences: SharedPrefs
 
@@ -23,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         requestWindowFeature(Window.FEATURE_ACTION_BAR)
         setContentView(R.layout.activity_main)
+
+        mainLayout.setListener(this)
 
         preferences = SharedPrefs(this)
         when {
@@ -44,9 +48,15 @@ class LoginActivity : AppCompatActivity() {
             val id = inputId.text.toString()
             val password = inputPassword.text.toString()
             when {
-                id.trim().isBlank() -> inputId.error = "Masukkan ID Anda terlebih dahulu"
-                password.trim().isBlank() -> inputPassword.error =
-                    "Masukkan Password Anda terlebih dahulu"
+                id.trim().isBlank() -> {
+                    inputId.error = "Masukkan ID Anda terlebih dahulu"
+                    setLoading(false)
+                }
+                password.trim().isBlank() -> {
+                    inputPassword.error =
+                        "Masukkan Password Anda terlebih dahulu"
+                    setLoading(false)
+                }
                 else -> {
                     akun.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
@@ -88,14 +98,12 @@ class LoginActivity : AppCompatActivity() {
                                         }
                                     else toastMe("Akun tidak ditemukan ")
                                 } else toastMe("Akun tidak Ada")
-
                             }
                             setLoading(false)
                         }
                     })
                 }
             }
-
         }
     }
 
@@ -111,5 +119,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun toastMe(s: String) {
         Toast.makeText(this@LoginActivity, s, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSoftKeyboardShown(isShowing: Boolean) = isShowing.let {
+        imageview.visibility(it.not())
+        textHintLogin.visibility(it)
     }
 }
