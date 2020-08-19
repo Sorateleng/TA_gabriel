@@ -14,4 +14,6 @@
     <string name="wait_upload_warn_text">Tunggu selesai mengupload ....</string>
     <string name="permission_rejected_warn_text">Permissions not granted by the user.</string>
     <string name="failed_upload_warn_text">Gagal Upload</string>
+    <string name="grant_access_permission_hint_text">Ijinkan akses</string>
+    <string name="ok_text">OK</string>
 </resources>

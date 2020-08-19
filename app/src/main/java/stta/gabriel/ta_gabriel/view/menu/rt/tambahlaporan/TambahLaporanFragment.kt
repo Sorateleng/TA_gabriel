@@ -76,7 +76,7 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
                             showMessageOKCancel(
-                                "Ijinkan akses",
+                                getString(R.string.grant_access_permission_hint_text),
                                 DialogInterface.OnClickListener { dialog, which ->
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                         requestPermissions(
@@ -88,15 +88,19 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange {
                             return
                         }
                     }
-                }else getLocation(true)
+                } else getLocation(true)
             }
         }
 
     }
     private fun showMessageOKCancel(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(requireContext()).setMessage(message).setPositiveButton("OK", okListener)
-            .setNegativeButton("Cancel", null).create().show()
+        AlertDialog.Builder(requireContext())
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.ok_text), okListener)
+            .setNegativeButton(getString(R.string.cancel_text), null).create().show()
     }
+
+
     override fun onChange() {
         getLocation(true)
     }
