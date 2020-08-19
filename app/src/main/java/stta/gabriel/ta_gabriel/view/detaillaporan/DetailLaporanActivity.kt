@@ -76,7 +76,7 @@ class DetailLaporanActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             val urlImg = data?.getStringExtra(CameraActivity.EXTRA_IMG_URL).default()
-            Log.d("asdasdadasda", urlImg)
+            Log.d("cameraImage", urlImg)
         }
     }
 
