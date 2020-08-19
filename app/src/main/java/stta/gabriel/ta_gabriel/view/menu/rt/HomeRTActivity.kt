@@ -63,16 +63,16 @@ class HomeRTActivity : BaseActivity() {
             cancelable = false,
             cancelableTouchOutside = true
         ) {
-            setTitle("Apakah anda ingin keluar?")
-            positiveButton("Logout") {
+            setTitle(getString(R.string.exit_title_text))
+            positiveButton(getString(R.string.logout_text)) {
                 preferences.saveInt(IS_LOGGED_IN, 0)
                 startActivity(Intent(this@HomeRTActivity, LoginActivity::class.java))
                 finishAffinity()
             }
-            negativeButton("Keluar") {
+            negativeButton(getString(R.string.exit_text)) {
                 super.onBackPressed()
             }
-            neutralButton("Batal") {
+            neutralButton(getString(R.string.cancel_text)) {
 
             }
         }

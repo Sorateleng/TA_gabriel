@@ -53,7 +53,7 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_laporan)
-        setTitle("Menu Petugas")
+        setTitle(getString(R.string.officer_menu_title_text))
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         savedInstanceState?.getInt(SELECTED_MENU) ?: setNavTab()
         preferences = SharedPrefs(this)
@@ -74,16 +74,16 @@ class HomeActivity : BaseActivity() {
             cancelable = false,
             cancelableTouchOutside = true
         ) {
-            setTitle("Apakah anda ingin keluar?")
-            positiveButton("Logout") {
+            setTitle(getString(R.string.exit_title_text))
+            positiveButton(getString(R.string.logout_text)) {
                 preferences.saveInt(IS_LOGGED_IN, 0)
                 startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
                 finishAffinity()
             }
-            negativeButton("Keluar") {
+            negativeButton(getString(R.string.exit_text)) {
                 super.onBackPressed()
             }
-            neutralButton("Batal") {
+            neutralButton(getString(R.string.cancel_text)) {
 
             }
         }

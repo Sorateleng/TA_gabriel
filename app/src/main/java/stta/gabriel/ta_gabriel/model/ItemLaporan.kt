@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ItemLaporan(
     val foto1: String,
-    val foto2: String,
+    var foto2: String,
     val pelapor: String,
     var status: Int,
     val lokasi: Lokasi,

@@ -13,8 +13,10 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_camera.*
 import stta.gabriel.ta_gabriel.R
+import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.*
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
 import java.io.File
@@ -34,10 +36,14 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var prefs: SharedPrefs
+    private lateinit var akun: Akun
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        prefs = SharedPrefs(this)
+        akun = Gson().fromJson(prefs.getString(USER_VALUE), Akun::class.java)
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -148,11 +154,13 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
             camera_capture_button.setVisible()
         }
         btnSubmit.setOnClickListener {
+            imgPreview.isClickable = false
             progressBar.setVisible()
             btnSubmit.isEnabled = false
+            textHint.text = getString(R.string.wait_upload_warn_text)
             UploadImage(
                 this@CameraActivity,
-                "user",
+                akun.head.toString(),
                 photoFile.name,
                 photoFile,
                 this@CameraActivity,
@@ -185,7 +193,7 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
             } else {
                 Toast.makeText(
                     this,
-                    "Permissions not granted by the user.",
+                    getString(R.string.permission_rejected_warn_text),
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
@@ -219,7 +227,8 @@ class CameraActivity : AppCompatActivity(), UploadImage.CallbackUploadImageUrl {
         progressBar.setGone()
         btnSubmit.isEnabled = true
         if (imgUrl.isNullOrEmpty() && error != null) {
-            Toast.makeText(this, "Gagal Upload", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.failed_upload_warn_text), Toast.LENGTH_SHORT)
+                .show()
         } else {
             val intent = Intent(this, DetailLaporanActivity::class.java)
             intent.putExtra(EXTRA_IMG_URL, imgUrl)

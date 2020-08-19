@@ -48,12 +48,12 @@ class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.L
             val password = inputPassword.text.toString()
             when {
                 id.trim().isBlank() -> {
-                    inputId.error = "Masukkan ID Anda terlebih dahulu"
+                    inputId.error = getString(R.string.id_warn_error_text)
                     setLoading(false)
                 }
                 password.trim().isBlank() -> {
                     inputPassword.error =
-                        "Masukkan Password Anda terlebih dahulu"
+                        getString(R.string.password_warn_error_text)
                     setLoading(false)
                 }
                 else -> {
@@ -95,14 +95,14 @@ class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.L
                                         )
                                     }
                                     else -> {
-                                        toastMe("Akun tidak ada akses")
+                                        toastMe(getString(R.string.no_access_account_text))
                                     }
                                 }
                             } else {
-                                toastMe("Password Salah")
+                                toastMe(getString(R.string.wrong_password_text))
                             }
-                        else toastMe("Akun tidak ditemukan ")
-                    } else toastMe("Akun tidak Ada")
+                        else toastMe(getString(R.string.account_not_found_text))
+                    } else toastMe(getString(R.string.account_not_found_text))
                 }
                 setLoading(false)
             }

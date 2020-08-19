@@ -77,6 +77,12 @@ class DetailLaporanActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             val urlImg = data?.getStringExtra(CameraActivity.EXTRA_IMG_URL).default()
             Log.d("cameraImage", urlImg)
+            item.status = 3
+            item.foto2 = urlImg
+            laporan.setValue(item).addOnSuccessListener {
+                Toast.makeText(this, "Berhasil diupload", Toast.LENGTH_SHORT).show()
+            }
+                .addOnCompleteListener { this.finish() }
         }
     }
 
