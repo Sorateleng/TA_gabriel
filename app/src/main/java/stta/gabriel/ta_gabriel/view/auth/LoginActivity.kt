@@ -58,51 +58,54 @@ class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.L
                     setLoading(false)
                 }
                 else -> {
-                    akun.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onCancelled(p0: DatabaseError) {
-                            setLoading(false)
-                        }
-
-                        override fun onDataChange(p0: DataSnapshot) {
-                            if (p0.exists()) {
-                                Log.e("data1", p0.value.toString())
-                                val user = p0.child(inputId.text.toString())
-                                if (user.exists()) {
-                                    val akun = user.getValue<Akun>(Akun::class.java)
-                                    if (akun != null)
-                                        if (akun.password.toString() == inputPassword.text.toString()) {
-
-                                            when (akun.access) {
-                                                ID_OFFICER -> {
-                                                    HomeActivity.start(this@LoginActivity)
-                                                    preferences.saveInt(IS_LOGGED_IN, ID_OFFICER)
-                                                    preferences.saveString(
-                                                        USER_VALUE,
-                                                        Gson().toJson(akun)
-                                                    )
-                                                }
-                                                ID_RT -> {
-                                                    HomeRTActivity.start(this@LoginActivity)
-                                                    preferences.saveInt(IS_LOGGED_IN, ID_RT)
-                                                    preferences.saveString(
-                                                        USER_VALUE,
-                                                        Gson().toJson(akun)
-                                                    )
-                                                }
-                                                else -> {
-                                                    toastMe("Akun tidak ada akses")
-                                                }
-                                            }
-                                        } else {
-                                            toastMe("Password Salah")
-                                        }
-                                    else toastMe("Akun tidak ditemukan ")
-                                } else toastMe("Akun tidak Ada")
-                            }
-                            setLoading(false)
-                        }
-                    })
+                    akun.addListenerForSingleValueEvent(accountValueEventListener())
                 }
+            }
+        }
+    }
+
+    private fun accountValueEventListener(): ValueEventListener {
+        return object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                setLoading(false)
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    val user = p0.child(inputId.text.toString())
+                    if (user.exists()) {
+                        val account = user.getValue<Akun>(Akun::class.java)
+                        if (account != null)
+                            if (account.password.toString() == inputPassword.text.toString()) {
+
+                                when (account.access) {
+                                    ID_OFFICER -> {
+                                        HomeActivity.start(this@LoginActivity)
+                                        preferences.saveInt(IS_LOGGED_IN, ID_OFFICER)
+                                        preferences.saveString(
+                                            USER_VALUE,
+                                            Gson().toJson(account)
+                                        )
+                                    }
+                                    ID_RT -> {
+                                        HomeRTActivity.start(this@LoginActivity)
+                                        preferences.saveInt(IS_LOGGED_IN, ID_RT)
+                                        preferences.saveString(
+                                            USER_VALUE,
+                                            Gson().toJson(account)
+                                        )
+                                    }
+                                    else -> {
+                                        toastMe("Akun tidak ada akses")
+                                    }
+                                }
+                            } else {
+                                toastMe("Password Salah")
+                            }
+                        else toastMe("Akun tidak ditemukan ")
+                    } else toastMe("Akun tidak Ada")
+                }
+                setLoading(false)
             }
         }
     }

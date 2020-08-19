@@ -29,7 +29,7 @@ public class LocationTrack extends Service implements LocationListener {
 
     boolean canGetLocation = false;
 
-    private CallbackonLocChange callbackonLocChange;
+    CallbackonLocChange callbackonLocChange;
     Location loc;
     double latitude;
     double longitude;

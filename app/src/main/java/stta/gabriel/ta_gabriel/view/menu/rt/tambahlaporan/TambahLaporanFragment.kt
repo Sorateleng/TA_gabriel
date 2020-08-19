@@ -22,9 +22,6 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange {
     private var long = 0.0
     private var lat = 0.0
 
-    private var longSave = 0.0
-    private var latSave = 0.0
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
