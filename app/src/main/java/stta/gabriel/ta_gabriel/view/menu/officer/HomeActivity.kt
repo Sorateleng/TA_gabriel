@@ -12,9 +12,8 @@ import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.base.BaseActivity
 import stta.gabriel.ta_gabriel.model.Akun
-import stta.gabriel.ta_gabriel.util.SELECTED_MENU
-import stta.gabriel.ta_gabriel.util.SharedPrefs
-import stta.gabriel.ta_gabriel.util.USER_VALUE
+import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.auth.LoginActivity
 import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment
@@ -68,6 +67,26 @@ class HomeActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(SELECTED_MENU, navigation.selectedItemId)
+    }
+
+    override fun onBackPressed() {
+        showDialog(
+            cancelable = false,
+            cancelableTouchOutside = true
+        ) {
+            setTitle("Apakah anda ingin keluar?")
+            positiveButton("Logout") {
+                preferences.saveInt(IS_LOGGED_IN, 0)
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finishAffinity()
+            }
+            negativeButton("Keluar") {
+                super.onBackPressed()
+            }
+            neutralButton("Batal") {
+
+            }
+        }
     }
 
 
