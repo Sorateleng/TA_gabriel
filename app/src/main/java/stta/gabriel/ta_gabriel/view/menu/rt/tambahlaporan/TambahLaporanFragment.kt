@@ -2,6 +2,7 @@ package stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan
 
 import android.Manifest
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -11,16 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_tambah_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.util.LocationTrack
+import stta.gabriel.ta_gabriel.view.menu.rt.kirimlaporan.KirimLaporanActivity
 
-class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange {
+
+class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange{
     private var permissionsToRequest = arrayListOf<String>()
     private var permissionsRejected = arrayListOf<String>()
     private var permissions = arrayListOf<String>()
     private lateinit var locationTrack: LocationTrack
     private var long = 0.0
     private var lat = 0.0
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +39,13 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange {
         super.onViewCreated(view, savedInstanceState)
         locationTrack = LocationTrack(context, this)
         getLocation(true)
+
+        btntmbh.setOnClickListener (){
+            val intent = Intent(activity,KirimLaporanActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -146,5 +158,9 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange {
     companion object {
         const val ALL_PERMISSIONS_RESULT = 999
         fun newInstance() = TambahLaporanFragment()
+
+
+
     }
 }
+

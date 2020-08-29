@@ -15,13 +15,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.*
-import stta.gabriel.ta_gabriel.view.custom.LinearLayoutThatDetectsSoftKeyboard
 import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
 import stta.gabriel.ta_gabriel.view.menu.rt.HomeRTActivity
 import stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan.TambahLaporanFragment
 
 
-class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.Listener {
+class LoginActivity : AppCompatActivity() {
     private lateinit var akun: DatabaseReference
     private lateinit var preferences: SharedPrefs
 
@@ -35,7 +34,7 @@ class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.L
         requestWindowFeature(Window.FEATURE_ACTION_BAR)
         setContentView(R.layout.activity_main)
 
-        mainLayout.setListener(this)
+
 
         preferences = SharedPrefs(this)
         when {
@@ -216,7 +215,7 @@ class LoginActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboard.L
         Toast.makeText(this@LoginActivity, s, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSoftKeyboardShown(isShowing: Boolean) = isShowing.let {
+    fun onSoftKeyboardShown(isShowing: Boolean) = isShowing.let {
         imageview.visibility(it.not())
         textHintLogin.visibility(it)
     }
