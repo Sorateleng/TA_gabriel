@@ -84,7 +84,9 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
                 item.status,
                 item.lokasi,
                 item.head,
-                item.id_user
+                item.id_user,
+                item.tanggal_laporan
+
             ), item.status
         ).let { startActivity(it) }
     }

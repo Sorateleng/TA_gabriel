@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.menu.rt.tambahlaporan.TambahLaporanFragment">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rv_tmbhlprn">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,14 +17,17 @@
         android:id="@+id/tvtambahlaporan"
         android:text="abc" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
+        android:id="@+id/btntmbh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btntmbh"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_camera"
-        android:contentDescription="@string/app_name"
-        android:layout_margin="16dp">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="57dp"
+        android:src="@drawable/ic_camera" />
+</RelativeLayout>
 
-</FrameLayout>
+
+</LinearLayout>
+
