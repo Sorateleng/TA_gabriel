@@ -9,6 +9,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import stta.gabriel.ta_gabriel.R
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun ImageView.loadImageFromUrl(url: String, placeHolder: Int = R.drawable.ic_launcher_background) {
     Glide.with(context.applicationContext)
@@ -64,6 +66,10 @@ fun View.setGone() {
     if (this.visibility != View.GONE) this.visibility = View.GONE
 }
 
+fun View.setInvisible() {
+    if (this.visibility != View.INVISIBLE) this.visibility = View.INVISIBLE
+}
+
 fun View.visibility(isShow: Boolean) {
     if (isShow) this.setVisible() else this.setGone()
 }
@@ -71,3 +77,10 @@ fun View.visibility(isShow: Boolean) {
 fun Int?.default() = this ?: 0
 fun String?.default() = this ?: ""
 fun Boolean?.default() = this ?: false
+
+fun getCurrentTime(): String {
+    val calendar = Calendar.getInstance()
+    val formatInputDetail = "yyyy-MM-dd HH:mm:ss"
+    val sdf = SimpleDateFormat(formatInputDetail)
+    return sdf.format(calendar.time)
+}

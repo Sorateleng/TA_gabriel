@@ -46,10 +46,10 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
         }
         laporan = FirebaseDatabase.getInstance().reference.child(TABLE_LAPORAN)
         laporan.keepSynced(true)
-        getStockList()
+        getLaporanAll()
     }
 
-    private fun getStockList() {
+    private fun getLaporanAll() {
         val listUndone = mutableListOf<ItemLaporan>()
         val listProgress = mutableListOf<ItemLaporan>()
         laporan.addValueEventListener(object : ValueEventListener {
@@ -65,10 +65,10 @@ class LaporanFragment : Fragment(), LaporanAdapter.ItemAdapterCallback {
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
                         val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
-                        if (item?.id_user == topActivity.akun.head.default()) {
-                            if (item.status == ID_UNDONE) listUndone.add(item)
-                            else if (item.status == ID_PROGRESS) listProgress.add(item)
-                        }
+//                        if (item?.id_user == topActivity.akun.head.default()) {
+                        if (item?.status == ID_UNDONE) listUndone.add(item)
+                        else if (item?.status == ID_PROGRESS) listProgress.add(item)
+//                        }
                     }
                 }
                 stockList.addAll(listUndone)
