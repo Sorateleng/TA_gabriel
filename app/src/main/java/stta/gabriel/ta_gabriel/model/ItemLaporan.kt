@@ -12,8 +12,10 @@ data class ItemLaporan(
     val lokasi: Lokasi,
     val head: Long,
     val id_user: Int,
-    val tanggal_laporan: String
+    val tanggal_laporan: String,
+    var tanggal_proses: String,
+    var tanggal_selesai: String
 ) :Parcelable
 {
-    constructor() : this("", "", "", 0, Lokasi(0.0, 0.0), 0, 0, "")
+    constructor() : this("", "", "", 0, Lokasi(0.0, 0.0), 0, 0, "", "", "")
 }

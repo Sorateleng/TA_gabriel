@@ -3,31 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bggradient"
+    android:background="@color/soft_green"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".view.detaillaporan.DetailLaporanActivity">
 
     <LinearLayout
-        android:paddingVertical="20dp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="20dp">
 
         <ImageView
-            tools:src="@mipmap/ic_launcher"
-            android:paddingHorizontal="5dp"
             android:id="@+id/img_laporan1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:paddingHorizontal="5dp"
+            tools:src="@mipmap/ic_launcher" />
 
         <ImageView
-            tools:src="@mipmap/ic_launcher"
-            android:paddingHorizontal="5dp"
             android:id="@+id/img_laporan2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:paddingHorizontal="5dp"
+            tools:src="@mipmap/ic_launcher" />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -74,14 +75,35 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_proses"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="proses">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    </Button>
+        <Button
+            android:id="@+id/btnLoc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:text="Lihat Lokasi" />
+
+        <Button
+            android:id="@+id/btnDirection"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:text="Tunjukkan Arah" />
+
+        <Button
+            android:id="@+id/btn_proses"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:text="proses" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

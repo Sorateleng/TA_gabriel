@@ -37,9 +37,6 @@ class KirimLaporanActivity : AppCompatActivity() {
         btnkrmlprn.setOnClickListener {
             val head = System.currentTimeMillis()
             val dbReference = FirebaseDatabase.getInstance().reference
-            val calendar = Calendar.getInstance()
-            val formatInputDetail = "yyyy-MM-dd HH:mm:ss"
-            val sdf = SimpleDateFormat(formatInputDetail)
             val newItem = ItemLaporan(
                 foto1 = img,
                 foto2 = "",
@@ -48,7 +45,9 @@ class KirimLaporanActivity : AppCompatActivity() {
                 head = head,
                 lokasi = Lokasi(lat = lat, long = long),
                 id_user = akun.head.default(),
-                tanggal_laporan = sdf.format(calendar.time)
+                tanggal_laporan = getCurrentTime(),
+                tanggal_proses = "",
+                tanggal_selesai = ""
 
 
             )

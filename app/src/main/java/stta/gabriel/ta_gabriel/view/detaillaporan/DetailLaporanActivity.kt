@@ -2,6 +2,7 @@ package stta.gabriel.ta_gabriel.view.detaillaporan
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -14,6 +15,8 @@ import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.util.*
 import stta.gabriel.ta_gabriel.view.camera.CameraActivity
 import stta.gabriel.ta_gabriel.view.camera.CameraActivity.Companion.REQUEST_CODE_CAMERA
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailLaporanActivity : AppCompatActivity() {
 
@@ -38,7 +41,7 @@ class DetailLaporanActivity : AppCompatActivity() {
             btn_proses.text = "AMBIL FOTO SELESAI"
         } else if (isDone) {
             img_laporan2.setVisible()
-            btn_proses.setGone()
+            btn_proses.setInvisible()
         }
 
         laporan = FirebaseDatabase
@@ -60,10 +63,32 @@ class DetailLaporanActivity : AppCompatActivity() {
             if (isProgress) toCamera()
             else {
                 item.status = 2
+                item.tanggal_proses = getCurrentTime()
                 laporan.setValue(item).addOnSuccessListener {
                     Toast.makeText(this, "Berhasil diubah", Toast.LENGTH_SHORT).show()
                 }
                     .addOnCompleteListener { this.finish() }
+            }
+        }
+
+        if (item.lokasi.lat == 0.0 || item.lokasi.long == 0.0) {
+            btnLoc.setInvisible()
+            btnDirection.setInvisible()
+        }
+
+        btnLoc.setOnClickListener {
+            val gmmIntentUri =
+                Uri.parse("google.streetview:cbll=${item.lokasi.lat},${item.lokasi.long}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            startActivity(mapIntent)
+        }
+
+        btnDirection.setOnClickListener {
+            val gmmIntentUri = Uri.parse("geo:${item.lokasi.lat},${item.lokasi.long}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            mapIntent.resolveActivity(packageManager)?.let {
+                startActivity(mapIntent)
             }
         }
     }
@@ -79,6 +104,7 @@ class DetailLaporanActivity : AppCompatActivity() {
             Log.d("cameraImage", urlImg)
             item.status = 3
             item.foto2 = urlImg
+            item.tanggal_selesai = getCurrentTime()
             laporan.setValue(item).addOnSuccessListener {
                 Toast.makeText(this, "Berhasil diupload", Toast.LENGTH_SHORT).show()
             }

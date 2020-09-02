@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.util.TABLE_LAPORAN
-import stta.gabriel.ta_gabriel.util.default
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
 import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
 import stta.gabriel.ta_gabriel.view.menu.officer.HomeActivity
@@ -64,7 +63,7 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
                 if (dataSnapshot.exists()) {
                     for (data in dataSnapshot.children) {
                         val item = data.getValue(ItemLaporan::class.java)
-                        if (item?.status == 3 && item.id_user == topActivity.akun.head.default())
+                        if (item?.status == 3 /*&& item.id_user == topActivity.akun.head.default()*/)
                             list.add(item)
                     }
                 }
@@ -85,7 +84,9 @@ class RiwayatFragment : Fragment(), RiwayatAdapter.ItemAdapterCallback {
                 item.lokasi,
                 item.head,
                 item.id_user,
-                item.tanggal_laporan
+                item.tanggal_laporan,
+                item.tanggal_proses,
+                item.tanggal_selesai
 
             ), item.status
         ).let { startActivity(it) }
