@@ -60,4 +60,6 @@ dependencies {
 // CameraX View class
     implementation "androidx.camera:camera-view:1.0.0-alpha10"
 
+    implementation  'com.fxn769:pix:1.5.3'
+
 }

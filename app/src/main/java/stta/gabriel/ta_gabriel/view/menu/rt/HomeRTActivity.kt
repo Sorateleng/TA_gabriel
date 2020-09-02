@@ -2,12 +2,15 @@ package stta.gabriel.ta_gabriel.view.menu.rt
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.fxn.pix.Options
+import com.fxn.pix.Pix
+import com.fxn.utility.PermUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
@@ -16,6 +19,7 @@ import stta.gabriel.ta_gabriel.util.*
 import stta.gabriel.ta_gabriel.view.auth.LoginActivity
 import stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan.TambahLaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.rt.ulasan.UlasanRTFragment
+
 
 class HomeRTActivity : BaseActivity() {
 
@@ -79,6 +83,15 @@ class HomeRTActivity : BaseActivity() {
 
             }
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
     }
 
     companion object {

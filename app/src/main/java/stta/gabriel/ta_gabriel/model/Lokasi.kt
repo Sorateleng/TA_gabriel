@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Lokasi(
-    val lat: Int,
-    val long: Int
+    val lat: Double,
+    val long: Double
 ):Parcelable{
-    constructor():this(0,0)
+    constructor() : this(0.0, 0.0)
 }

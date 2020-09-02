@@ -93,7 +93,7 @@ class DetailLaporanActivity : AppCompatActivity() {
         fun startDetail(intent: Intent, itemLaporan: ItemLaporan, status: Int): Intent {
             intent.putExtra(KEY_DATA_LAPORAN, itemLaporan)
             intent.putExtra(IS_PROGRESS, status == ID_PROGRESS)
-            intent.putExtra(IS_DONE, ID_DONE)
+            intent.putExtra(IS_DONE, status == ID_DONE)
             return intent
         }
     }
