@@ -23,7 +23,7 @@ import stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan.TambahLaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.rt.ulasan.UlasanRTFragment
 
 
-class HomeRTActivity : BaseActivity() {
+class HomeRTActivity : BaseActivity(), RtCallback {
 
     private var lastTab = 0
     var fragment: Fragment? = null
@@ -107,6 +107,10 @@ class HomeRTActivity : BaseActivity() {
 
 
         }
+    }
+
+    override fun toHomeListener() {
+        setNavTab()
     }
 }
 

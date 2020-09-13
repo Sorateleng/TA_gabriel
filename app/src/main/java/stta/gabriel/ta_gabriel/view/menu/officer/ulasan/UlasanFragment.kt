@@ -60,7 +60,6 @@ class UlasanFragment : Fragment(), UlasanAdapter.ItemAdapterCallback {
                     for (data in dataSnapshot.children) {
                         val item = data.getValue(ItemUlasan::class.java)
                         item?.let {
-                            if (item.id_user == topActivity.akun.head.default())
                                 list.add(it)
                         }
                     }

@@ -4,31 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.menu.rt.ulasan.UlasanRTFragment">
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/inputulasan"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/lv_ulasan"
-        android:padding="5dp"
-        android:orientation="vertical">
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/inputulasan">
-
-        </EditText>
-    </LinearLayout>
-
+        android:layout_margin="16dp">
+    </EditText>
     <Button
+        android:id="@+id/btn_inputulasan"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_kirimulasan"
+        android:layout_below="@+id/inputulasan"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/lv_ulasan"
         android:text="KIRIM">
-
     </Button>
 </RelativeLayout>
 
