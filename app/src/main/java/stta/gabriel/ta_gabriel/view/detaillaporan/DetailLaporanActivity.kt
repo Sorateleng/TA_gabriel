@@ -29,7 +29,6 @@ class DetailLaporanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_laporan)
-
         setData(
             item.foto1,
             item.foto2,

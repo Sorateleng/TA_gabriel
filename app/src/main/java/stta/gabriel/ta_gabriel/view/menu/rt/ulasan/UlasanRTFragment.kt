@@ -14,6 +14,7 @@ import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.model.ItemUlasan
 import stta.gabriel.ta_gabriel.util.SharedPrefs
+import stta.gabriel.ta_gabriel.util.TABLE_ULASAN
 import stta.gabriel.ta_gabriel.util.USER_VALUE
 import stta.gabriel.ta_gabriel.util.default
 import stta.gabriel.ta_gabriel.view.menu.rt.HomeRTActivity
@@ -46,7 +47,7 @@ class UlasanRTFragment : Fragment() {
                 )
                 val dbReference = FirebaseDatabase.getInstance().reference
                 dbReference
-                    .child("ulasan")
+                    .child(TABLE_ULASAN)
                     .child(ulasan.id_laporan.toString())
                     .setValue(ulasan)
                     .addOnSuccessListener {

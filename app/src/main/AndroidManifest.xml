@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.menu.officer.StatusActivity"></activity>
         <activity android:name=".view.menu.rt.kirimlaporan.KirimLaporanActivity" />
         <activity android:name=".view.camera.CameraActivity" />
         <activity android:name=".view.menu.rt.HomeRTActivity" />
