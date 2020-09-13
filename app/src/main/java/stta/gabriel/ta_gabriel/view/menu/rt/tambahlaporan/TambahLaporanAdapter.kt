@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_laporan.view.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
+import stta.gabriel.ta_gabriel.util.ID_PROGRESS
 import stta.gabriel.ta_gabriel.util.ID_UNDONE
 
 class TambahLaporanAdapter(
@@ -36,8 +37,9 @@ class TambahLaporanAdapter(
             itemView.apply {
                 itemTitle.text = item.pelapor
                 itemStatus.text = if (item.status == ID_UNDONE) "Belum dikerjakan"
-                else "Dalam Pengerjaan"
-                setOnClickListener { callback.itemClick(item) }
+                else if (item.status == ID_PROGRESS) "Sedang Dikerjakan"
+                else "Selesai Dikerjakan"
+                setOnClickListener { callback.onClick(item) }
             }
         }
     }
@@ -46,7 +48,6 @@ class TambahLaporanAdapter(
         fun itemClick(item: ItemLaporan)
 
     }
-
 
 
 
