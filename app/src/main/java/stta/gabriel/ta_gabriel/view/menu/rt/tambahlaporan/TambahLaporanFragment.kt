@@ -14,14 +14,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.fxn.pix.Options
 import com.fxn.pix.Pix
 import com.fxn.utility.PermUtil
+import com.google.firebase.database.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_tambah_laporan.*
+import kotlinx.android.synthetic.main.item_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.Akun
+import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.util.*
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity
+import stta.gabriel.ta_gabriel.view.detaillaporan.DetailLaporanActivity.Companion.startDetail
+import stta.gabriel.ta_gabriel.view.menu.rt.HomeRTActivity
 import stta.gabriel.ta_gabriel.view.menu.rt.kirimlaporan.KirimLaporanActivity
 import java.io.File
 
@@ -31,6 +38,10 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
     private var permissionsToRequest = arrayListOf<String>()
     private var permissionsRejected = arrayListOf<String>()
     private var permissions = arrayListOf<String>()
+    private var stockList : MutableList<ItemLaporan> = mutableListOf()
+    private lateinit var itemAdapter: TambahLaporanAdapter
+    private lateinit var laporan : DatabaseReference
+    private lateinit var topActivity : HomeRTActivity
     private lateinit var locationTrack: LocationTrack
     private var long = 0.0
     private var lat = 0.0
@@ -48,6 +59,15 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        itemAdapter = TambahLaporanAdapter(stockList, this)
+        rv_laporanrt.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = itemAdapter
+
+        }
+
+
+
         prefs = SharedPrefs(requireContext())
         akun = Gson().fromJson(prefs.getString(USER_VALUE), Akun::class.java)
 
@@ -58,8 +78,37 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
         btntmbh.setOnClickListener {
             openCamera()
         }
+        laporan = FirebaseDatabase.getInstance().reference.child(TABLE_LAPORAN)
+        laporan.keepSynced(true)
+        getLaporanAll()
     }
 
+    private fun getLaporanAll() {
+        val listProgress = mutableListOf<ItemLaporan>()
+        laporan.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                listProgress.clear()
+                stockList.clear()
+
+                if (dataSnapshot.exists()) {
+                    for (data in dataSnapshot.children) {
+                        val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
+
+                        if (item?. id_user == akun.head.default())
+              listProgress.add(item)
+                    }
+                }
+
+                stockList.addAll(listProgress)
+                itemAdapter.notifyDataSetChanged()
+            }
+        })
+    }
     private fun openCamera() {
         val option = Options.init()
             .setRequestCode(CAMERA_REQ_CODE)
@@ -219,6 +268,11 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
             }
         }
         return result
+    }
+
+     fun onClick(item: ItemLaporan) {
+        val intent = Intent(context,DetailLaporanActivity::class.java)
+        startActivity(startDetail(intent,item,item.status))
     }
 
     companion object {

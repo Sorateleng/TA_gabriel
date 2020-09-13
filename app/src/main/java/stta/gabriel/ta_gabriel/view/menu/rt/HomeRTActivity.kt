@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -15,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.base.BaseActivity
+import stta.gabriel.ta_gabriel.model.ItemLaporan
 import stta.gabriel.ta_gabriel.util.*
 import stta.gabriel.ta_gabriel.view.auth.LoginActivity
 import stta.gabriel.ta_gabriel.view.menu.rt.tambahlaporan.TambahLaporanFragment
@@ -45,6 +47,9 @@ class HomeRTActivity : BaseActivity() {
             }
             true
         }
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
