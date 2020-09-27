@@ -73,6 +73,7 @@ class KirimLaporanActivity : AppCompatActivity() {
             }
             negativeButton("Tidak jadi") {
 
+
             }
         }
     }

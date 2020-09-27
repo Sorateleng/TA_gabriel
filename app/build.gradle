@@ -61,5 +61,6 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha10"
 
     implementation  'com.fxn769:pix:1.5.3'
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
 
 }

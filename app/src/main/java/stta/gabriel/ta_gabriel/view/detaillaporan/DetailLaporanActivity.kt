@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_detail_laporan.*
+import org.jetbrains.anko.browse
+import org.jetbrains.anko.toast
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.ItemLaporan
+import stta.gabriel.ta_gabriel.model.Lokasi
 import stta.gabriel.ta_gabriel.util.*
 import stta.gabriel.ta_gabriel.view.camera.CameraActivity
 import stta.gabriel.ta_gabriel.view.camera.CameraActivity.Companion.REQUEST_CODE_CAMERA
-import java.text.SimpleDateFormat
-import java.util.*
 
 class DetailLaporanActivity : AppCompatActivity() {
 
@@ -83,13 +84,16 @@ class DetailLaporanActivity : AppCompatActivity() {
         }
 
         btnDirection.setOnClickListener {
-            val gmmIntentUri = Uri.parse("geo:${item.lokasi.lat},${item.lokasi.long}")
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            mapIntent.resolveActivity(packageManager)?.let {
-                startActivity(mapIntent)
-            }
+            intentLoc(item.lokasi, item.pelapor)
         }
+    }
+
+    private fun intentLoc(loc: Lokasi, pelapor: String) {
+
+        if (loc.lat != 0.0 || loc.long != 0.0) {
+            val uri = URI_MAPS(loc.lat, loc.long, pelapor)
+            browse(uri)
+        } else toast("Lokasi belum diset oleh penjual")
     }
 
     private fun toCamera() {
