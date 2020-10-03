@@ -36,10 +36,14 @@ class TambahLaporanAdapter(
         fun bind(item: ItemLaporan) {
             itemView.apply {
                 itemTitle.text = item.pelapor
-                itemStatus.text = if (item.status == ID_UNDONE) "Belum dikerjakan"
-                else if (item.status == ID_PROGRESS) "Sedang Dikerjakan"
-                else "Selesai Dikerjakan"
-                setOnClickListener { callback.onClick(item) }
+                itemStatus.text = when (item.status) {
+                    ID_UNDONE -> "Belum dikerjakan"
+                    ID_PROGRESS -> "Sedang Dikerjakan"
+                    else -> {
+                        setOnClickListener { callback.onClick(item) }
+                        "Selesai Dikerjakan"
+                    }
+                }
             }
         }
     }
