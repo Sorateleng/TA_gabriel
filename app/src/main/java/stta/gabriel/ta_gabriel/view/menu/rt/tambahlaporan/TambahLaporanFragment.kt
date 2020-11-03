@@ -21,7 +21,6 @@ import com.fxn.utility.PermUtil
 import com.google.firebase.database.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_tambah_laporan.*
-import kotlinx.android.synthetic.main.item_laporan.*
 import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.model.ItemLaporan
@@ -38,10 +37,10 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
     private var permissionsToRequest = arrayListOf<String>()
     private var permissionsRejected = arrayListOf<String>()
     private var permissions = arrayListOf<String>()
-    private var stockList : MutableList<ItemLaporan> = mutableListOf()
+    private var stockList: MutableList<ItemLaporan> = mutableListOf()
     private lateinit var itemAdapter: TambahLaporanAdapter
-    private lateinit var laporan : DatabaseReference
-    private lateinit var topActivity : HomeRTActivity
+    private lateinit var laporan: DatabaseReference
+    private lateinit var topActivity: HomeRTActivity
     private lateinit var locationTrack: LocationTrack
     private var long = 0.0
     private var lat = 0.0
@@ -65,8 +64,6 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
             adapter = itemAdapter
 
         }
-
-
 
         prefs = SharedPrefs(requireContext())
         akun = Gson().fromJson(prefs.getString(USER_VALUE), Akun::class.java)
@@ -99,8 +96,8 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
                     for (data in dataSnapshot.children) {
                         val item = data.getValue<ItemLaporan>(ItemLaporan::class.java)
 
-                        if (item?. id_user == akun.head.default())
-              listProgress.add(item)
+                        if (item?.id_user == akun.head.default())
+                            listProgress.add(item)
                     }
                 }
 
@@ -109,6 +106,7 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
             }
         })
     }
+
     private fun openCamera() {
         val option = Options.init()
             .setRequestCode(CAMERA_REQ_CODE)
@@ -270,9 +268,9 @@ class TambahLaporanFragment : Fragment(), LocationTrack.CallbackonLocChange,
         return result
     }
 
-     fun onClick(item: ItemLaporan) {
-        val intent = Intent(context,DetailLaporanActivity::class.java)
-        startActivity(startDetail(intent,item,item.status))
+    fun onClick(item: ItemLaporan) {
+        val intent = Intent(context, DetailLaporanActivity::class.java)
+        startActivity(startDetail(intent, item, item.status))
     }
 
     companion object {

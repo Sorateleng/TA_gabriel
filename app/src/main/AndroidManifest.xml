@@ -16,23 +16,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.menu.officer.StatusActivity"></activity>
-        <activity android:name=".view.menu.rt.kirimlaporan.KirimLaporanActivity" />
-        <activity android:name=".view.camera.CameraActivity" />
-        <activity android:name=".view.menu.rt.HomeRTActivity" />
-        <activity android:name=".view.detaillaporan.DetailLaporanActivity" />
-        <activity android:name=".view.menu.officer.HomeActivity" />
-        <activity
-            android:name=".view.auth.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoTitle"
-            android:windowSoftInputMode="adjustResize">
+
+
+
+        <activity android:name=".view.menu.rt.kirimlaporan.KirimLaporanActivity" >
+        </activity>
+        <activity android:name=".view.camera.CameraActivity" >
+        </activity>
+        <activity android:name=".view.menu.rt.HomeRTActivity" >
+        </activity>
+        <activity android:name=".view.detaillaporan.DetailLaporanActivity" >
+        </activity>
+        <activity android:name=".view.menu.officer.HomeActivity" >
+        </activity>
+        <activity android:name=".view.splash.SplashActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".view.auth.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTitle"
+            android:windowSoftInputMode="adjustResize"/>
+
     </application>
 
 </manifest>

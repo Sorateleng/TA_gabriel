@@ -22,3 +22,4 @@ const val DIR_UNSET_IMG = " img_unset_dir"
 
 //corection
 const val SELECTED_MENU = "selected_menu"
+const val MAPS_BY_LONGLAT = "http://maps.google.com/maps?q=loc:"

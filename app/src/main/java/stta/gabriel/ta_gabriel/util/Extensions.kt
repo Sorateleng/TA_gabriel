@@ -84,3 +84,7 @@ fun getCurrentTime(): String {
     val sdf = SimpleDateFormat(formatInputDetail)
     return sdf.format(calendar.time)
 }
+
+fun URI_MAPS(lat: Double, long: Double, address: String): String {
+    return "$MAPS_BY_LONGLAT$lat,$long($address)"
+}
