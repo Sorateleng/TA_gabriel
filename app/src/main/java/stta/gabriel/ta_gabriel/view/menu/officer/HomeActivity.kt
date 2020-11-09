@@ -13,7 +13,7 @@ import stta.gabriel.ta_gabriel.R
 import stta.gabriel.ta_gabriel.base.BaseActivity
 import stta.gabriel.ta_gabriel.model.Akun
 import stta.gabriel.ta_gabriel.util.*
-import stta.gabriel.ta_gabriel.view.auth.LoginActivity
+import stta.gabriel.ta_gabriel.view.splash.LoginActivity
 import stta.gabriel.ta_gabriel.view.menu.officer.laporan.LaporanFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.riwayat.RiwayatFragment
 import stta.gabriel.ta_gabriel.view.menu.officer.ulasan.UlasanFragment

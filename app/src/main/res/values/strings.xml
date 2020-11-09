@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PoncoClean</string>
+    <string name="app_name">Ponco Bersih</string>
 
     <string name="exit_title_text">Apakah anda ingin keluar?</string>
     <string name="logout_text">Logout</string>
