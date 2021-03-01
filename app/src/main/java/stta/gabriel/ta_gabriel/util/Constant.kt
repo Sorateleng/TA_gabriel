@@ -19,6 +19,11 @@ const val FBS_BUCKET_NAME = "gs://ta15030015.appspot.com"
 const val DIR_ITEM_IMG = " img_report_dir"
 const val DIR_UNSET_IMG = " img_unset_dir"
 
+//notif
+//const val NOTIF_KEY = "notif_key"
+//const val NOTIF_CHANNEL = "ponco_channel"
+//const val NOTIF_DESC = "PONCO NOTIFACATION"
+//const val NOTIF_TOPICS_GLOBAL = "global"
 
 //corection
 const val SELECTED_MENU = "selected_menu"
