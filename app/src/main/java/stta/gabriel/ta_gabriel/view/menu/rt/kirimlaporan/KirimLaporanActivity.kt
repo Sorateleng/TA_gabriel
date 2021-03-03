@@ -67,11 +67,11 @@ class KirimLaporanActivity : AppCompatActivity() {
             cancelableTouchOutside = true
         ) {
             setTitle("Apakah Anda yakin untuk membatalkannya?")
-            positiveButton("Tentu") {
+            positiveButton("Iya") {
                 UploadImage().deleteImage(img)
                 super.onBackPressed()
             }
-            negativeButton("Tidak jadi") {
+            negativeButton("Tidak") {
 
 
             }
