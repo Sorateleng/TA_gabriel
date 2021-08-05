@@ -70,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        btnRegister.setOnClickListener { RegisterActivity.start(this) }
         initPermissions()
     }
 

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="stta.gabriel.ta_gabriel">
 
-
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -34,6 +32,11 @@
 
         <activity
             android:name=".view.auth.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTitle"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".view.auth.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoTitle"
             android:windowSoftInputMode="adjustResize" />
