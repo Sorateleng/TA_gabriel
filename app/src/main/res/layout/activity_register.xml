@@ -135,11 +135,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_password"
+                    android:layout_marginBottom="20dp"
                     style="@style/Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/til_otp"
                     android:background="@drawable/rounded_edt"
-                    app:layout_constraintBottom_toBottomOf="@id/batas_bawah_card"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -149,6 +150,30 @@
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
                         android:hint="Masukkan Password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingVertical="5dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_otp"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_edt"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/batas_bawah_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputOtp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:hint="Masukkan OTP"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:maxLines="1"
