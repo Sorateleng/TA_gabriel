@@ -70,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        btnRegister.setOnClickListener { RegisterActivity.start(this) }
         initPermissions()
     }
 
@@ -90,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun findUnAskedPermissions(permissions: ArrayList<String>): ArrayList<String> {
-        var result = arrayListOf<String>()
+        val result = arrayListOf<String>()
         permissions.forEachIndexed { _, s ->
             if (!hasPermission(s)) {
                 result.add(s)
@@ -100,16 +102,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun hasPermission(permission: String): Boolean {
-        if (canMakeSmores()) {
+        if (canMakeSores()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED)
             }
         }
         return true
     }
 
-    private fun canMakeSmores(): Boolean {
-        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    private fun canMakeSores(): Boolean {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
     }
 
     override fun onRequestPermissionsResult(
@@ -128,10 +130,10 @@ class LoginActivity : AppCompatActivity() {
 
                 if (permissionsRejected.size > 0) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected[0])) {
                             showMessageOKCancel(
                                 getString(R.string.grant_access_permission_hint_text),
-                                DialogInterface.OnClickListener { dialog, which ->
+                                DialogInterface.OnClickListener { _, _ ->
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                         requestPermissions(
                                             permissionsRejected.toTypedArray(),
@@ -163,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
-                    val user = p0.child(inputId.text.toString())
+                    val user = p0.child(inputId.text.toString().getPhoneNumberOnly())
                     if (user.exists()) {
                         val account = user.getValue<Akun>(Akun::class.java)
                         if (account != null)
@@ -213,10 +215,5 @@ class LoginActivity : AppCompatActivity() {
 
     private fun toastMe(s: String) {
         Toast.makeText(this@LoginActivity, s, Toast.LENGTH_SHORT).show()
-    }
-
-    fun onSoftKeyboardShown(isShowing: Boolean) = isShowing.let {
-        imageview.visibility(it.not())
-        textHintLogin.visibility(it)
     }
 }

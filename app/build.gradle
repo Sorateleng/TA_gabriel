@@ -55,6 +55,7 @@ dependencies {
     }
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation "com.google.firebase:firebase-auth:17.0.0"
 
     // CameraX core library using the camera2 implementation
     def camerax_version = "1.0.0-beta03"
