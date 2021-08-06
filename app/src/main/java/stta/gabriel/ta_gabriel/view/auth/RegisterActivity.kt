@@ -144,7 +144,3 @@ class RegisterActivity : AppCompatActivity(), LinearLayoutThatDetectsSoftKeyboar
         toast("Verifikasi gagal, coba kembali\n code: $code ")
     }
 }
-
-private fun String.getPhoneNumberOnly(): String {
-    return "8${this.substringAfter('8')}"
-}

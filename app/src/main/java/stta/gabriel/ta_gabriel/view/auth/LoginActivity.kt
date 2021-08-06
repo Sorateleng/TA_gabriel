@@ -165,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
-                    val user = p0.child(inputId.text.toString())
+                    val user = p0.child(inputId.text.toString().getPhoneNumberOnly())
                     if (user.exists()) {
                         val account = user.getValue<Akun>(Akun::class.java)
                         if (account != null)

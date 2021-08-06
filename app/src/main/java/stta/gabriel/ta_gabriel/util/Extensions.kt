@@ -88,3 +88,7 @@ fun getCurrentTime(): String {
 fun URI_MAPS(lat: Double, long: Double, address: String): String {
     return "$MAPS_BY_LONGLAT$lat,$long($address)"
 }
+
+fun String.getPhoneNumberOnly(): String {
+    return "8${this.substringAfter('8')}"
+}
