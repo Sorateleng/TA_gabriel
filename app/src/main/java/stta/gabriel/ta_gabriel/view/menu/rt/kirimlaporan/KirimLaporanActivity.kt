@@ -40,7 +40,7 @@ class KirimLaporanActivity : AppCompatActivity() {
             val newItem = ItemLaporan(
                 foto1 = img,
                 foto2 = "",
-                pelapor = "Laporan dari  ${akun.head}",
+                pelapor = "Laporan dari  ${akun.nama}",
                 status = 1,
                 head = head,
                 lokasi = Lokasi(lat = lat, long = long),

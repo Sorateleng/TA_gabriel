@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/soft_pink"
+    android:background="@color/soft_blue"
     android:orientation="vertical"
     tools:context=".view.auth.LoginActivity">
 
@@ -100,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginVertical="20dp"
-                    android:src="@drawable/logopc"
+                    android:src="@drawable/logogk"
                     app:layout_constraintBottom_toTopOf="@id/til_id"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
