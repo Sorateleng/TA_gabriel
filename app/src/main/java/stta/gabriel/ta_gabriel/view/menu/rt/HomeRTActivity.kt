@@ -51,7 +51,7 @@ class HomeRTActivity : BaseActivity(), RtCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_rt)
-        setTitle("Menu RT")
+        setTitle("Menu Pelapor")
         preferences = SharedPrefs(this)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         savedInstanceState?.getInt(SELECTED_MENU) ?: setNavTab()
