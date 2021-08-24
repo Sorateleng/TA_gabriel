@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="350dp"
         android:layout_height="451dp"
-        android:src="@drawable/logogk"
+        android:src="@drawable/logowisata"
         android:id="@+id/splsh"
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"

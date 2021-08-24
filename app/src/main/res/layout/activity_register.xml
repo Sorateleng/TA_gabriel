@@ -100,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginVertical="20dp"
-                    android:src="@drawable/logogk"
+                    android:src="@drawable/logowisata"
                     app:layout_constraintBottom_toTopOf="@id/til_id"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
